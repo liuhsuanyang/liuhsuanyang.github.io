@@ -123,7 +123,7 @@
   "faq": [],
   "calendar": {
     "title": "我的時間",
-    "note": "只顯示忙碌時段。想約時間，挑個空檔寄信給我，或直接預約。",
+    "note": "只顯示忙碌時段。想約時間，挑個空檔寄信給我。",
     "embed": "https://calendar.google.com/calendar/embed?src=8a4d45f4f1fe047fc6653dbe68921b84df31f6ce18a5e9de04eec7410ae61daa%40group.calendar.google.com&ctz=Asia%2FTaipei",
     "view": "month",
     "link": "",
@@ -164,5 +164,5 @@
     ]
   },
   "modules": {},
-  "updated": "2026-09-28T03:26:19+08:00"
+  "updated": "2026-09-28T03:36:44+08:00"
 }
