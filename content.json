@@ -142,27 +142,27 @@
   },
   "contact": {
     "emailEnc": "bW9jLmxpYW1nQDk3MzE2NDY2OTBh",
-    "phone": "",
+    "phone": "0966461379",
     "org": "國立臺灣科技大學 營建工程系",
-    "title": "學生",
+    "title": "",
     "links": [
       {
         "type": "line",
-        "value": "",
+        "value": "https://line.me/ti/p/lXlsWfzQMd",
         "label": ""
       },
       {
         "type": "instagram",
-        "value": "",
+        "value": "https://www.instagram.com/_s_a_m96?stkn=MXZyN2F0MGh6ZzRoZQ%3D%3D&utm_source=qr",
         "label": ""
       },
       {
         "type": "facebook",
-        "value": "",
+        "value": "https://www.facebook.com/share/1DNW3hieTZ/?mibextid=wwXIfr",
         "label": ""
       }
     ]
   },
   "modules": {},
-  "updated": "2026-09-27"
+  "updated": "2026-09-28T03:01:03+08:00"
 }
