@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>網站編輯器</title>
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<style>
+@font-face{font-family:"TWKai";src:url(../assets/kai.woff2) format("woff2");font-display:swap}
+:root{--g:#1A3A30;--gold:#C9AB6E;--gold-ink:#7B6636;--bg:#F3EFE6;--card:#FFFFFF;--ink:#1E2B26;--mut:#5B6B63;--line:#DAD2C2;--ok:#2F6B45;--bad:#A33A2E;--okbg:#E4F0E6;--badbg:#F7E3DF}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;padding-bottom:110px}
+header{background:var(--g);color:#EDE8DC;padding:calc(14px + env(safe-area-inset-top)) 16px 14px}
+header .in{max-width:760px;margin:0 auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+header h1{font:400 24px/1.2 "TWKai",serif;color:var(--gold);margin:0;flex:1}
+header a,header button{color:#EDE8DC;font:inherit;font-size:14px;background:none;border:1px solid rgba(237,232,220,.35);border-radius:999px;padding:6px 12px;text-decoration:none;cursor:pointer}
+.wrap{max-width:760px;margin:0 auto;padding:16px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:0;margin:0 0 12px}
+.panel>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;padding:14px 16px}
+.panel>summary::-webkit-details-marker{display:none}
+.panel>summary h2{font-size:17px;font-weight:600;margin:0;flex:1}
+.panel>summary .st{font-size:13px;color:var(--mut)}
+.panel>summary:after{content:"▾";color:var(--mut);transition:transform .2s}
+.panel[open]>summary:after{transform:rotate(180deg)}
+.panel>.body{padding:0 16px 16px}
+.panel.static{padding:16px}
+.panel.static>h2{font-size:18px;font-weight:600;margin:0 0 4px}
+.hint{color:var(--mut);font-size:14px;margin:0 0 10px}
+label{display:block;font-size:14px;font-weight:600;margin:12px 0 4px}
+label small{font-weight:400;color:var(--mut)}
+input[type=text],input[type=email],input[type=url],input[type=tel],input[type=password],textarea,select{width:100%;font:inherit;font-size:16px;line-height:1.5;color:var(--ink);background:#FCFBF8;border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+textarea{min-height:96px;resize:vertical}
+input:focus,textarea:focus,select:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:var(--gold)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;font:inherit;font-weight:600;font-size:15px;line-height:1.2;border-radius:999px;padding:10px 18px;border:1px solid var(--g);background:#fff;color:var(--g);cursor:pointer;position:relative;overflow:hidden}
+.btn.primary{background:var(--g);color:#fff}
+.btn.gold{background:var(--gold);border-color:var(--gold);color:#1A3A30}
+.btn.small{padding:6px 12px;font-size:13px}
+.btn.danger{border-color:var(--bad);color:var(--bad)}
+.btn:disabled{opacity:.4;cursor:default}
+.btn input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer}
+.chap{border:1px solid var(--line);border-radius:14px;padding:12px 14px 14px;margin:14px 0 0;background:#FBF9F4}
+.chap>.bar b{font-size:15px;color:var(--g)}
+.item{border:1px dashed var(--line);border-radius:12px;padding:10px 12px 12px;margin:12px 0 0;background:#fff}
+.bar{display:flex;align-items:center;gap:6px}
+.bar b{flex:1;font-size:14px;color:var(--mut)}
+.add{margin-top:12px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.msg{border-radius:10px;padding:10px 12px;margin:0 0 14px;font-size:15px}
+.msg.ok{background:var(--okbg);color:var(--ok)}
+.msg.bad{background:var(--badbg);color:var(--bad)}
+.msg.info{background:#EFEADF;color:var(--ink)}
+.msg a{color:inherit;font-weight:600}
+.photo{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.photo img,.photo .ph{width:96px;height:96px;border-radius:50%;object-fit:cover;object-position:center 30%;border:3px solid var(--gold);background:#EFEADF}
+.photo .ph{display:flex;align-items:center;justify-content:center;color:var(--mut);font-size:13px}
+.thumb{width:100%;max-width:220px;aspect-ratio:1/1;object-fit:cover;border-radius:10px;display:block;margin-top:8px;background:#EFEADF}
+.savebar{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.96);border-top:1px solid var(--line);padding:12px 16px calc(12px + env(safe-area-inset-bottom))}
+.savebar .in{max-width:760px;margin:0 auto;display:flex;align-items:center;gap:12px}
+#status{flex:1;font-size:14px;color:var(--mut)}
+#status.dirty{color:var(--gold-ink);font-weight:600}
+.check{display:flex;align-items:center;gap:8px;font-weight:400;margin-top:12px}
+.check input{width:18px;height:18px}
+.steps{margin:8px 0 0;padding-left:20px;color:var(--mut);font-size:14px}
+.err{color:var(--bad);font-size:14px;margin:6px 0 0}
+details.help{margin-top:12px;font-size:14px;color:var(--mut)}
+details.help summary{cursor:pointer;color:var(--g);font-weight:600}
+details.help ol,details.help ul{padding-left:20px;margin:8px 0}
+.files{font-size:13px;color:var(--mut);max-height:180px;overflow:auto;background:#FBF9F4;border-radius:10px;padding:8px 12px;margin-top:10px}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<header><div class="in"><h1>網站編輯器</h1><a id="siteLink" href="../" target="_blank" rel="noopener">看網站</a><button id="logout" type="button" hidden>登出</button></div></header>
+
+<div class="wrap">
+  <div id="msg" class="msg" hidden></div>
+
+  <section id="login" class="panel static" hidden>
+    <h2>登入</h2>
+    <p class="hint">貼上你在 GitHub 產生的「金鑰」（開頭是 github_pat_）。金鑰只會存在這台裝置的瀏覽器裡，不會傳到別的地方。</p>
+    <label for="token">GitHub 金鑰</label>
+    <input id="token" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="github_pat_…">
+    <label class="check"><input id="remember" type="checkbox" checked> 記住這台裝置（自己的手機或電腦才勾）</label>
+    <p id="loginErr" class="err" hidden></p>
+    <div style="margin-top:14px"><button id="loginBtn" class="btn primary" type="button">登入</button></div>
+    <ol class="steps">
+      <li>金鑰過期或弄丟：到 GitHub 重新產生一把，貼上即可。</li>
+      <li>在別人的電腦上使用時，不要勾「記住這台裝置」，用完按「登出」。</li>
+    </ol>
+  </section>
+
+  <div id="editor" hidden>
+    <details class="panel" open data-p="basic"><summary><h2>基本資料</h2><span class="st"></span></summary><div class="body">
+      <p class="hint">網站第一個畫面顯示的內容。</p>
+      <label for="f-name">中文姓名</label><input id="f-name" type="text" data-k="name">
+      <label for="f-nameEn">英文姓名</label><input id="f-nameEn" type="text" data-k="nameEn">
+      <label for="f-tagline">一句話介紹</label><textarea id="f-tagline" data-k="tagline" style="min-height:64px"></textarea>
+      <label for="f-headline">學校／單位</label><input id="f-headline" type="text" data-k="headline">
+      <label for="f-status">目前狀態 <small>（選填，例如：正在找 2027 暑期實習。留空就不顯示）</small></label><input id="f-status" type="text" data-k="status">
+    </div></details>
+
+    <details class="panel" open data-p="hub"><summary><h2>聯絡捷徑（第一頁）</h2><span class="st"></span></summary><div class="body">
+      <p class="hint">第一頁會有「存入聯絡人」「寄信給我」兩個按鈕，下面一排小按鈕是你填的 LINE、Instagram、Facebook 等。沒填的不會顯示，可以用 ↑ ↓ 調整順序。</p>
+      <label for="f-email">Email <small>（網站上不會直接顯示文字，減少被網路機器人收集）</small></label><input id="f-email" type="email" autocapitalize="off" spellcheck="false">
+      <label for="f-phone">電話 <small>（選填。填了就會公開，不想公開請留空）</small></label><input id="f-phone" type="tel" placeholder="09xx-xxx-xxx">
+      <div id="links"></div>
+      <button id="addLink" class="btn add" type="button">＋ 新增聯絡方式</button>
+      <details class="help"><summary>各平台要填什麼？</summary><ul>
+        <li>LINE：填 LINE ID（需在 LINE 設定開啟「允許利用 ID 加入好友」），或貼上 LINE 的加好友連結（https://line.me/ti/p/… 開頭）。</li>
+        <li>Instagram、Threads、X、Telegram：填帳號名稱，例如 liuhsuanyang。</li>
+        <li>Facebook、Messenger：填個人網址最後那段（例如 liuhsuanyang），或直接貼完整網址。</li>
+        <li>LinkedIn：填個人網址 linkedin.com/in/ 後面那段，或貼完整網址。</li>
+        <li>其他網站：選「其他連結」，填名稱和完整網址。</li>
+      </ul></details>
+      <label for="f-org">存入聯絡人時顯示的單位</label><input id="f-org" type="text">
+      <label for="f-title">存入聯絡人時顯示的職稱</label><input id="f-title" type="text">
+    </div></details>
+
+    <details class="panel" data-p="photo"><summary><h2>照片</h2><span class="st"></span></summary><div class="body">
+      <p class="hint">放在故事最後的「拱心石」段落。上傳後會自動縮小，按「儲存並發布」後才會出現在網站上。</p>
+      <div class="photo">
+        <img id="photoImg" alt="目前的照片" hidden><div id="photoPh" class="ph">尚無照片</div>
+        <div class="row">
+          <span class="btn">選擇照片<input id="photoFile" type="file" accept="image/*"></span>
+          <button id="photoDel" class="btn danger" type="button" hidden>移除照片</button>
+        </div>
+      </div>
+    </div></details>
+
+    <details class="panel" data-p="intro"><summary><h2>開場白</h2><span class="st"></span></summary><div class="body">
+      <label for="f-intro">故事開始前的一段話 <small>（換行＝新段落）</small></label><textarea id="f-intro" data-k="intro"></textarea>
+    </div></details>
+
+    <details class="panel" data-p="chapters"><summary><h2>故事章節</h2><span class="st"></span></summary><div class="body">
+      <p class="hint">每一章會在橋上砌一對石頭，最多 6 章。用 ↑ ↓ 調整順序，最上面的章節最先出現。沒有內容的章節不會顯示。</p>
+      <div id="chapters"></div>
+      <button id="addChap" class="btn add" type="button">＋ 新增一章</button>
+    </div></details>
+
+    <details class="panel" data-p="keystone"><summary><h2>拱心石</h2><span class="st"></span></summary><div class="body">
+      <p class="hint">故事的最後一段，說明把這些經歷串起來的你。</p>
+      <label for="f-ktitle">標題</label><input id="f-ktitle" type="text">
+      <label for="f-ktext">內容 <small>（換行＝新段落）</small></label><textarea id="f-ktext"></textarea>
+    </div></details>
+
+    <details class="panel" data-p="news"><summary><h2>最新動態</h2><span class="st"></span></summary><div class="body">
+      <p class="hint">近況、得獎、新證照、活動分享。最上面的顯示在最前面。</p>
+      <label for="t-news">段落標題</label><input id="t-news" type="text" data-mt="news" placeholder="最新動態">
+      <div id="news"></div><button class="btn add" type="button" data-add="news">＋ 新增一則</button>
+    </div></details>
+
+    <details class="panel" data-p="gallery"><summary><h2>作品相簿</h2><span class="st"></span></summary><div class="body">
+      <p class="hint">工地、作品、活動照片。可以一次選多張，上傳後會自動縮小。</p>
+      <label for="t-gallery">段落標題</label><input id="t-gallery" type="text" data-mt="gallery" placeholder="作品相簿">
+      <div id="gallery"></div>
+      <span class="btn add">＋ 上傳照片（可多選）<input id="galFile" type="file" accept="image/*" multiple></span>
+    </div></details>
+
+    <details class="panel" data-p="videos"><summary><h2>影片</h2><span class="st"></span></summary><div class="body">
+      <p class="hint">貼上 YouTube 影片網址（一般影片或 Shorts 都可以）。</p>
+      <label for="t-videos">段落標題</label><input id="t-videos" type="text" data-mt="videos" placeholder="影片">
+      <div id="videos"></div><button class="btn add" type="button" data-add="videos">＋ 新增影片</button>
+    </div></details>
+
+    <details class="panel" data-p="testimonials"><summary><h2>推薦與評價</h2><span class="st"></span></summary><div class="body">
+      <p class="hint">老師、主管、合作夥伴對你的評語。請只放真實、對方同意公開的內容。</p>
+      <label for="t-testimonials">段落標題</label><input id="t-testimonials" type="text" data-mt="testimonials" placeholder="他們怎麼說">
+      <div id="testimonials"></div><button class="btn add" type="button" data-add="testimonials">＋ 新增推薦</button>
+    </div></details>
+
+    <details class="panel" data-p="faq"><summary><h2>常見問題</h2><span class="st"></span></summary><div class="body">
+      <p class="hint">例如「可以找你做什麼？」「接受實習邀約嗎？」</p>
+      <label for="t-faq">段落標題</label><input id="t-faq" type="text" data-mt="faq" placeholder="常見問題">
+      <div id="faq"></div><button class="btn add" type="button" data-add="faq">＋ 新增問答</button>
+    </div></details>
+
+    <details class="panel" data-p="calendar"><summary><h2>行事曆與預約</h2><span class="st"></span></summary><div class="body">
+      <p class="hint">兩個網址都留空，網站就不會顯示這一段。建議只公開「有空／忙碌」，不要公開上課地點等細節。</p>
+      <label for="f-ctitle">段落標題</label><input id="f-ctitle" type="text">
+      <label for="f-cnote">說明文字</label><input id="f-cnote" type="text">
+      <label for="f-cembed">Google 日曆公開網址 <small>（以 https://calendar.google.com/calendar/embed 開頭）</small></label><input id="f-cembed" type="url" placeholder="https://calendar.google.com/calendar/embed?src=…">
+      <label for="f-cview">預設顯示方式</label><select id="f-cview"><option value="week">一週</option><option value="month">一個月</option><option value="agenda">列表</option></select>
+      <label for="f-clink">預約頁面網址 <small>（選填，例如 Google 日曆的預約時間表）</small></label><input id="f-clink" type="url" placeholder="https://calendar.app.google/…">
+      <label for="f-cbtn">預約按鈕文字</label><input id="f-cbtn" type="text">
+      <details class="help"><summary>怎麼拿到 Google 日曆公開網址？</summary><ol>
+        <li>用電腦打開 Google 日曆，左邊「我的日曆」找到要公開的日曆（建議另外建一個「課表」日曆），按「⋮」→「設定和共用」。</li>
+        <li>「存取權」勾選「公開這個日曆」，旁邊選「只顯示有空／忙碌（隱藏詳細資料）」。</li>
+        <li>往下找到「整合日曆」，複製「這個日曆的公開網址」，貼到上面的欄位。</li>
+      </ol></details>
+    </div></details>
+
+    <details class="panel" data-p="form"><summary><h2>留言表單</h2><span class="st"></span></summary><div class="body">
+      <p class="hint">用 Google 表單收留言（免費，回覆會存到你的 Google 帳號）。留空就不顯示。</p>
+      <label for="f-ftitle">段落標題</label><input id="f-ftitle" type="text">
+      <label for="f-fnote">說明文字</label><input id="f-fnote" type="text">
+      <label for="f-furl">Google 表單網址</label><input id="f-furl" type="url" placeholder="https://docs.google.com/forms/d/e/…/viewform">
+      <label class="check"><input id="f-fembed" type="checkbox"> 直接顯示在網頁裡（不勾就只放一個按鈕）</label>
+      <label for="f-fbtn">按鈕文字</label><input id="f-fbtn" type="text">
+    </div></details>
+
+    <details class="panel" data-p="resume"><summary><h2>履歷下載</h2><span class="st"></span></summary><div class="body">
+      <p class="hint">上傳 PDF 履歷（10 MB 以內），「聯絡我」段落會出現下載按鈕。PDF 會公開給所有人，上傳前請拿掉地址、身分證字號等資料。</p>
+      <p id="resumeNow" class="hint"></p>
+      <div class="row"><span class="btn">上傳 PDF<input id="resumeFile" type="file" accept="application/pdf"></span><button id="resumeDel" class="btn danger" type="button" hidden>移除履歷</button></div>
+      <label for="f-rlabel">按鈕文字</label><input id="f-rlabel" type="text">
+    </div></details>
+
+    <details class="panel" data-p="update"><summary><h2>網站更新</h2><span class="st"></span></summary><div class="body">
+      <p class="hint">以後要加新功能，把收到的更新檔（.zip）在這裡安裝就好。你的內容、照片、履歷都不會被覆蓋。</p>
+      <p id="verNow" class="hint"></p>
+      <span class="btn">選擇更新檔（.zip）<input id="zipFile" type="file" accept=".zip,application/zip"></span>
+      <div id="zipInfo" hidden><div class="files" id="zipList"></div><div class="row" style="margin-top:10px"><button id="zipGo" class="btn gold" type="button">開始更新</button><button id="zipCancel" class="btn" type="button">取消</button></div></div>
+    </div></details>
+  </div>
+</div>
+
+<div class="savebar" id="savebar" hidden><div class="in"><span id="status">沒有未儲存的修改</span><button id="saveBtn" class="btn gold" type="button">儲存並發布</button></div></div>
+
+<script>
+(function(){
+'use strict';
+var ITEM_F=[['title','標題','例如：工地實習生'],['org','單位／性質（選填）','例如：○○營造、創業構想'],['period','期間（選填）','例如：2026 暑假'],['desc','說明（選填，換行＝新的一點）','',1],['link','連結（選填，要以 https:// 開頭）','https://']];
+var TYPES=[['line','LINE'],['instagram','Instagram'],['facebook','Facebook'],['messenger','Messenger'],['threads','Threads'],['linkedin','LinkedIn'],['youtube','YouTube'],['github','GitHub'],['x','X'],['telegram','Telegram'],['whatsapp','WhatsApp'],['website','個人網站'],['other','其他連結']];
+var LINK_F=[['type','平台','',0,TYPES],['value','帳號或網址','例如：liuhsuanyang'],['label','顯示名稱（只有「其他連結」需要）','']];
+var MODS={
+  news:{label:'動態',f:[['date','日期','例如：2026 年 10 月'],['title','標題',''],['text','內容','',1],['link','連結（選填）','https://']],blank:{date:'',title:'',text:'',link:''}},
+  videos:{label:'影片',f:[['title','影片標題',''],['url','YouTube 網址','https://www.youtube.com/watch?v=…']],blank:{title:'',url:''}},
+  testimonials:{label:'推薦',f:[['quote','推薦內容','',1],['name','推薦人',''],['role','身分／關係','例如：實習主管']],blank:{quote:'',name:'',role:''}},
+  faq:{label:'問答',f:[['q','問題',''],['a','回答','',1]],blank:{q:'',a:''}}
+};
+var PROTECT=/^(content\.json|contact\.vcf|images\/|files\/|CNAME$)/;
+var OKEXT=/\.(html|css|js|json|svg|png|jpe?g|webp|gif|ico|woff2?|ttf|txt|md|xml|webmanifest)$/i;
+var MAX_CH=6;
+var q=new URLSearchParams(location.search);
+var host=location.hostname,local=/^(localhost|127\.0\.0\.1)$/.test(host);
+var API=(local&&q.get('api'))||'https://api.github.com';
+var OWNER,REPO;
+if(/\.github\.io$/i.test(host)){OWNER=host.split('.')[0];REPO=host.toLowerCase()}
+else if(local&&q.get('repo')){var rp=q.get('repo').split('/');OWNER=rp[0];REPO=rp[1]}
+var token=null,data=null,sha={},dirty=false,lastVcf=null,busy=false,toDelete={},zipFiles=null;
+
+function $(s){return document.querySelector(s)}
+function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+function msg(type,text,link){var m=$('#msg');m.className='msg '+type;m.textContent=text;if(link){m.appendChild(document.createTextNode(' '));var a=el('a',null,link[0]);a.href=link[1];a.target='_blank';a.rel='noopener';m.appendChild(a)}m.hidden=false;if(type!=='info')m.scrollIntoView({behavior:'smooth',block:'start'})}
+function clearMsg(){$('#msg').hidden=true}
+function setDirty(v){dirty=v;var s=$('#status');s.textContent=v?'有未儲存的修改':'沒有未儲存的修改';s.className=v?'dirty':'';if(data)statuses()}
+function b64FromBytes(bytes){var bin='';for(var i=0;i<bytes.length;i+=0x8000)bin+=String.fromCharCode.apply(null,bytes.subarray(i,i+0x8000));return btoa(bin)}
+function b64utf8(s){return b64FromBytes(new TextEncoder().encode(s))}
+function utf8b64(b){var bin=atob(String(b).replace(/\s/g,'')),a=new Uint8Array(bin.length);for(var i=0;i<bin.length;i++)a[i]=bin.charCodeAt(i);return new TextDecoder().decode(a)}
+function encEmail(e){return e?b64utf8(Array.from(e).reverse().join('')):''}
+function decEmail(x){try{return x?Array.from(utf8b64(x)).reverse().join(''):''}catch(e){return ''}}
+function nowIso(){var d=new Date(),o=-d.getTimezoneOffset(),p=function(n){return String(Math.floor(Math.abs(n))).padStart(2,'0')};return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate())+'T'+p(d.getHours())+':'+p(d.getMinutes())+':'+p(d.getSeconds())+(o>=0?'+':'-')+p(o/60)+':'+p(o%60)}
+function siteUrl(){return REPO&&/\.github\.io$/.test(REPO)?'https://'+REPO+'/':location.origin+'/'}
+function bare(p){return String(p||'').split('?')[0]}
+function gh(path,opt){
+  opt=opt||{};
+  var h={'Accept':'application/vnd.github+json','Authorization':'Bearer '+token,'X-GitHub-Api-Version':'2022-11-28'};
+  if(opt.body)h['Content-Type']='application/json';
+  return fetch(API+path,{method:opt.method||'GET',headers:h,body:opt.body,cache:'no-store'}).then(function(r){
+    if(r.ok)return r.status===204?{}:r.json();
+    return r.json().catch(function(){return {}}).then(function(j){var e=new Error(j.message||('HTTP '+r.status));e.status=r.status;throw e});
+  },function(){var e=new Error('network');e.status=0;throw e});
+}
+function R(p){return '/repos/'+OWNER+'/'+REPO+p}
+function contents(p){return R('/contents/'+p)}
+function putFile(path,b64,message,s){var body={message:message,content:b64};if(s)body.sha=s;return gh(contents(path),{method:'PUT',body:JSON.stringify(body)})}
+function fileSha(path){return gh(contents(path)).then(function(r){return r.sha},function(e){if(e.status===404)return null;throw e})}
+function upload(path,b64,message){return fileSha(path).then(function(s){return putFile(path,b64,message,s)})}
+function removeFile(path){return fileSha(path).then(function(s){if(!s)return;return gh(contents(path),{method:'DELETE',body:JSON.stringify({message:'刪除 '+path,sha:s})})})}
+function explain(e,when){
+  if(e.status===0)return '連不上 GitHub，請檢查網路後再試一次。';
+  if(e.status===401)return '金鑰無效或已經過期。請到 GitHub 重新產生一把新的金鑰，再貼上登入。';
+  if(e.status===403)return '金鑰權限不夠。請確認：金鑰有選到「'+REPO+'」這個儲存庫，而且 Contents 權限是「Read and write」。';
+  if(e.status===404)return when==='load'?'找不到網站資料。請確認金鑰有選到「'+REPO+'」這個儲存庫，而且網站檔案已經上傳。':'找不到檔案（404）。';
+  if(e.status===409)return '網站內容在別的地方被改過了（例如另一台裝置）。請重新整理這一頁，再修改一次。';
+  if(e.status===422&&/too large|size/i.test(e.message))return '檔案太大，請換小一點的檔案。';
+  return '發生錯誤：'+e.message;
+}
+
+/* ---------- generic list editor ---------- */
+function field(parent,obj,f,idp){
+  var id=idp+'-'+f[0];var lab=el('label',null,f[1]);lab.htmlFor=id;parent.appendChild(lab);var inp;
+  if(f[4]){inp=el('select');f[4].forEach(function(o){var op=el('option',null,o[1]);op.value=o[0];inp.appendChild(op)});inp.value=obj[f[0]]||f[4][0][0];obj[f[0]]=inp.value}
+  else{inp=f[3]?el('textarea'):el('input');if(!f[3])inp.type=/^(link|url)$/.test(f[0])?'url':'text';inp.value=obj[f[0]]||'';if(f[2])inp.placeholder=f[2]}
+  inp.id=id;inp.oninput=inp.onchange=function(){obj[f[0]]=inp.value;setDirty(true)};parent.appendChild(inp);return inp;
+}
+function ctrl(bar,arr,i,rerender,name,onDel){
+  [['↑','上移',-1],['↓','下移',1]].forEach(function(b){var btn=el('button','btn small',b[0]);btn.type='button';btn.title=b[1];btn.setAttribute('aria-label',b[1]);btn.disabled=(b[2]<0&&i===0)||(b[2]>0&&i===arr.length-1);btn.onclick=function(){var j=i+b[2];var t=arr[i];arr[i]=arr[j];arr[j]=t;setDirty(true);rerender()};bar.appendChild(btn)});
+  var del=el('button','btn small danger','刪除');del.type='button';del.onclick=function(){if(confirm('確定要刪除「'+(name||'這一筆')+'」嗎？')){if(onDel)onDel(arr[i]);arr.splice(i,1);setDirty(true);rerender()}};bar.appendChild(del);
+}
+function renderItems(box,arr,fields,label,idp,rerender,extra){
+  box.textContent='';
+  arr.forEach(function(it,i){
+    var card=el('div','item'),bar=el('div','bar');bar.appendChild(el('b',null,label+' '+(i+1)));
+    ctrl(bar,arr,i,rerender,it.title||it.label||it.q||it.name||it.caption,extra&&extra.onDel);card.appendChild(bar);
+    if(extra&&extra.before)extra.before(card,it);
+    fields.forEach(function(f){field(card,it,f,idp+'-'+i)});
+    box.appendChild(card);
+  });
+}
+function focusLast(box){var items=box.querySelectorAll('.item');var last=items[items.length-1];if(last){last.scrollIntoView({behavior:'smooth',block:'center'});var f=last.querySelector('input,textarea,select');if(f)f.focus({preventScroll:true})}}
+
+/* ---------- chapters ---------- */
+function renderChapters(){
+  var box=$('#chapters');box.textContent='';
+  data.chapters.forEach(function(ch,i){
+    var c=el('div','chap'),bar=el('div','bar');bar.appendChild(el('b',null,'第 '+(i+1)+' 章'));
+    ctrl(bar,data.chapters,i,renderChapters,ch.title);c.appendChild(bar);
+    field(c,ch,['title','章節標題','例如：經歷'],'c'+i);
+    field(c,ch,['lead','一句引導（選填）','例如：先從現場開始…'],'c'+i);
+    var lab=el('label',null,'內容類型');lab.htmlFor='c'+i+'-type';c.appendChild(lab);
+    var sel=el('select');sel.id='c'+i+'-type';[['list','清單（經歷、學歷、專案…）'],['tags','標籤（技能、興趣…）']].forEach(function(o){var op=el('option',null,o[1]);op.value=o[0];sel.appendChild(op)});
+    sel.value=ch.type==='tags'?'tags':'list';
+    sel.onchange=function(){
+      if(sel.value==='tags'){ch.type='tags';if(!Array.isArray(ch.tags))ch.tags=(ch.items||[]).map(function(x){return x.title}).filter(Boolean)}
+      else{ch.type='list';if(!Array.isArray(ch.items)||!ch.items.length)ch.items=(ch.tags||[]).map(function(t){return {title:t,org:'',period:'',desc:'',link:''}})}
+      setDirty(true);renderChapters();
+    };
+    c.appendChild(sel);
+    if(ch.type==='tags'){
+      var tl=el('label',null,'每行寫一個');tl.htmlFor='c'+i+'-tags';c.appendChild(tl);
+      var ta=el('textarea');ta.id='c'+i+'-tags';ta.style.minHeight='150px';ta.value=(ch.tags||[]).join('\n');
+      ta.oninput=function(){ch.tags=ta.value.split('\n');setDirty(true)};c.appendChild(ta);
+    }else{
+      if(!Array.isArray(ch.items))ch.items=[];
+      var ib=el('div');c.appendChild(ib);
+      var re=function(){renderItems(ib,ch.items,ITEM_F,'第 '+(i+1)+' 章・項目','c'+i+'i',re)};re();
+      var add=el('button','btn add','＋ 新增一筆');add.type='button';add.onclick=function(){ch.items.push({title:'',org:'',period:'',desc:'',link:''});setDirty(true);re();focusLast(ib)};c.appendChild(add);
+    }
+    box.appendChild(c);
+  });
+  $('#addChap').disabled=data.chapters.length>=MAX_CH;
+  $('#addChap').textContent=data.chapters.length>=MAX_CH?'已經 6 章（最多 6 章）':'＋ 新增一章';
+}
+$('#addChap').onclick=function(){if(data.chapters.length>=MAX_CH)return;data.chapters.push({title:'',lead:'',type:'list',items:[{title:'',org:'',period:'',desc:'',link:''}]});setDirty(true);renderChapters();var cs=document.querySelectorAll('.chap');var last=cs[cs.length-1];last.scrollIntoView({behavior:'smooth',block:'start'});last.querySelector('input').focus({preventScroll:true})};
+
+/* ---------- contact links & modules ---------- */
+function renderLinks(){renderItems($('#links'),data.contact.links,LINK_F,'聯絡方式','l',renderLinks)}
+$('#addLink').onclick=function(){data.contact.links.push({type:'line',value:'',label:''});setDirty(true);renderLinks();focusLast($('#links'))};
+function renderMod(k){var re=function(){renderItems($('#'+k),data[k],MODS[k].f,MODS[k].label,'m'+k,re)};re()}
+document.querySelectorAll('[data-add]').forEach(function(b){var k=b.dataset.add;b.onclick=function(){data[k].push(JSON.parse(JSON.stringify(MODS[k].blank)));setDirty(true);renderMod(k);focusLast($('#'+k))}});
+function renderGallery(){
+  var re=function(){renderItems($('#gallery'),data.gallery,[['caption','說明文字（選填）','']],'照片','g',re,{
+    before:function(card,it){var im=el('img','thumb');im.src=it._preview||('../'+it.src);im.alt='';card.appendChild(im)},
+    onDel:function(it){if(it.src)toDelete[bare(it.src)]=1}})};re();
+}
+
+/* ---------- panel status ---------- */
+function statuses(){
+  var st=function(p,t){var e=document.querySelector('[data-p="'+p+'"] .st');if(e)e.textContent=t};
+  var n=function(a){return (a||[]).length};
+  st('basic',data.status?'有狀態標籤':'');
+  st('hub',(data.contact.links||[]).filter(function(l){return String(l.value||'').trim()}).length+' 個平台');
+  st('photo',data.photo?'已上傳':'未使用');
+  st('chapters',n(data.chapters)+' 章');
+  st('news',n(data.news)?n(data.news)+' 則':'未使用');
+  st('gallery',n(data.gallery)?n(data.gallery)+' 張':'未使用');
+  st('videos',n(data.videos)?n(data.videos)+' 部':'未使用');
+  st('testimonials',n(data.testimonials)?n(data.testimonials)+' 則':'未使用');
+  st('faq',n(data.faq)?n(data.faq)+' 題':'未使用');
+  st('calendar',(data.calendar.embed||data.calendar.link)?'使用中':'未使用');
+  st('form',data.form.url?'使用中':'未使用');
+  st('resume',data.resume.file?'已上傳':'未使用');
+}
+
+/* ---------- fill & collect ---------- */
+function fill(){
+  if(!Array.isArray(data.chapters))data.chapters=[];
+  ['news','gallery','videos','testimonials','faq'].forEach(function(k){if(!Array.isArray(data[k]))data[k]=[]});
+  ['keystone','calendar','contact','form','resume','modules'].forEach(function(k){data[k]=data[k]||{}});
+  if(!Array.isArray(data.contact.links))data.contact.links=[];
+  document.querySelectorAll('[data-k]').forEach(function(inp){inp.value=data[inp.dataset.k]||'';inp.oninput=function(){data[inp.dataset.k]=inp.value;setDirty(true)}});
+  document.querySelectorAll('[data-mt]').forEach(function(inp){inp.value=data.modules[inp.dataset.mt]||'';inp.oninput=function(){data.modules[inp.dataset.mt]=inp.value;setDirty(true)}});
+  var bind=function(id,obj,key,def){var e=$(id);if(e.type==='checkbox'){e.checked=!!obj[key];e.onchange=function(){obj[key]=e.checked;setDirty(true)};return}e.value=obj[key]!=null&&obj[key]!==''?obj[key]:(def||'');e.oninput=e.onchange=function(){obj[key]=e.value;setDirty(true)}};
+  bind('#f-ktitle',data.keystone,'title');bind('#f-ktext',data.keystone,'text');
+  bind('#f-ctitle',data.calendar,'title','我的時間');bind('#f-cnote',data.calendar,'note');bind('#f-cembed',data.calendar,'embed');
+  bind('#f-cview',data.calendar,'view','week');bind('#f-clink',data.calendar,'link');bind('#f-cbtn',data.calendar,'button','預約時間');
+  bind('#f-ftitle',data.form,'title','留言給我');bind('#f-fnote',data.form,'note');bind('#f-furl',data.form,'url');bind('#f-fembed',data.form,'embed');bind('#f-fbtn',data.form,'button','填寫表單');
+  bind('#f-rlabel',data.resume,'label','下載我的履歷（PDF）');
+  $('#f-email').value=decEmail(data.contact.emailEnc);$('#f-phone').value=data.contact.phone||'';$('#f-org').value=data.contact.org||'';$('#f-title').value=data.contact.title||'';
+  ['#f-email','#f-phone','#f-org','#f-title'].forEach(function(s){$(s).oninput=function(){setDirty(true)}});
+  renderChapters();renderLinks();Object.keys(MODS).forEach(renderMod);renderGallery();
+  showPhoto(data.photo?('../'+data.photo):null);showResume();
+  setDirty(false);
+}
+function blankItem(it){return !Object.keys(it).some(function(x){return x!=='type'&&String(it[x]||'').trim()})}
+function collect(){
+  var c=data.contact;c.emailEnc=encEmail($('#f-email').value.trim());c.phone=$('#f-phone').value.trim();c.org=$('#f-org').value.trim();c.title=$('#f-title').value.trim();
+  c.links=c.links.filter(function(l){return !blankItem(l)||['line','instagram','facebook'].indexOf(l.type)>=0});
+  data.chapters.forEach(function(ch){
+    if(ch.type==='tags'){ch.tags=(ch.tags||[]).map(function(t){return String(t).trim()}).filter(Boolean);delete ch.items}
+    else{ch.items=(ch.items||[]).filter(function(it){return !blankItem(it)});delete ch.tags}
+  });
+  ['news','videos','testimonials','faq'].forEach(function(k){data[k]=data[k].filter(function(it){return !blankItem(it)})});
+  data.version=3;
+  return data;
+}
+function validate(){
+  var e=$('#f-email').value.trim();
+  if(e&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e))return 'Email 格式看起來不對，請檢查一下。';
+  if(!String(data.name||'').trim())return '中文姓名不能空白。';
+  var bad=null,https=function(u,what){if(u&&!/^https?:\/\//i.test(String(u).trim()))bad=bad||what+'要以 https:// 開頭。'};
+  data.chapters.forEach(function(ch,i){if(!String(ch.title||'').trim())bad=bad||'第 '+(i+1)+' 章還沒有標題。';(ch.items||[]).forEach(function(it){https(it.link,'「'+(it.title||'')+'」的連結')})});
+  data.news.forEach(function(x){https(x.link,'動態「'+(x.title||'')+'」的連結')});
+  data.videos.forEach(function(x){if(x.url&&!/(youtu\.be\/|youtube\.com\/)/.test(x.url))bad=bad||'影片「'+(x.title||'')+'」要貼 YouTube 的網址。'});
+  data.contact.links.forEach(function(l){if((l.type==='website'||l.type==='other')&&l.value)https(l.value,'「'+(l.label||'其他連結')+'」的網址')});
+  var ce=String(data.calendar.embed||'').trim();
+  if(ce&&!/^https:\/\/calendar\.google\.com\/calendar\/(u\/\d+\/)?embed\?/.test(ce))bad=bad||'日曆公開網址要以 https://calendar.google.com/calendar/embed 開頭（請照「怎麼拿到公開網址」的步驟複製）。';
+  https(data.calendar.link,'預約頁面網址');https(data.form.url,'表單網址');
+  return bad;
+}
+function phoneE164(p){var d=String(p||'').replace(/[^\d+]/g,'');if(/^09\d{8}$/.test(d))return '+886'+d.slice(1);return d}
+function vEsc(s){return String(s||'').replace(/\\/g,'\\\\').replace(/\r?\n/g,'\\n').replace(/,/g,'\\,').replace(/;/g,'\\;')}
+var LINKTPL={line:function(v){return 'https://line.me/ti/p/~'+v.replace(/^@/,'')},instagram:function(v){return 'https://www.instagram.com/'+v.replace(/^@/,'')+'/'},facebook:function(v){return 'https://www.facebook.com/'+v},messenger:function(v){return 'https://m.me/'+v},threads:function(v){return 'https://www.threads.net/@'+v.replace(/^@/,'')},linkedin:function(v){return 'https://www.linkedin.com/in/'+v},youtube:function(v){return 'https://www.youtube.com/@'+v.replace(/^@/,'')},github:function(v){return 'https://github.com/'+v},x:function(v){return 'https://x.com/'+v.replace(/^@/,'')},telegram:function(v){return 'https://t.me/'+v.replace(/^@/,'')},whatsapp:function(v){return 'https://wa.me/'+v.replace(/[^\d]/g,'')}};
+function linkUrl(l){var v=String(l.value||'').trim();if(!v)return '';if(/^https?:\/\//i.test(v))return v;var f=LINKTPL[l.type];return f?f(v):''}
+function buildVcf(d){
+  var n=String(d.name||''),c=d.contact||{},email=decEmail(c.emailEnc),L=['BEGIN:VCARD','VERSION:3.0'];
+  L.push('N;CHARSET=UTF-8:'+vEsc(n.slice(0,1))+';'+vEsc(n.slice(1))+';;;');
+  L.push('FN;CHARSET=UTF-8:'+vEsc(n));
+  if(c.org)L.push('ORG;CHARSET=UTF-8:'+vEsc(c.org));
+  if(c.title)L.push('TITLE;CHARSET=UTF-8:'+vEsc(c.title));
+  if(c.phone)L.push('TEL;TYPE=CELL:'+phoneE164(c.phone));
+  if(email)L.push('EMAIL;TYPE=INTERNET:'+email);
+  L.push('URL:'+siteUrl());
+  (c.links||[]).forEach(function(l){var u=linkUrl(l);if(u)L.push('X-SOCIALPROFILE;TYPE='+l.type+':'+u)});
+  L.push('END:VCARD');
+  return L.join('\r\n')+'\r\n';
+}
+
+/* ---------- uploads ---------- */
+function resize(file,max){return new Promise(function(res,rej){var url=URL.createObjectURL(file),img=new Image();img.onload=function(){var s=Math.min(1,max/Math.max(img.naturalWidth,img.naturalHeight)),w=Math.round(img.naturalWidth*s),h=Math.round(img.naturalHeight*s),cv=document.createElement('canvas');cv.width=w;cv.height=h;var cx=cv.getContext('2d');cx.fillStyle='#fff';cx.fillRect(0,0,w,h);cx.drawImage(img,0,0,w,h);URL.revokeObjectURL(url);cv.toBlob(function(b){b?res(b):rej(new Error('無法處理這張照片'))},'image/jpeg',0.86)};img.onerror=function(){URL.revokeObjectURL(url);rej(new Error('這個檔案不是可以讀取的圖片'))};img.src=url})}
+function blobB64(b){return b.arrayBuffer().then(function(buf){return b64FromBytes(new Uint8Array(buf))})}
+function showPhoto(src){var img=$('#photoImg');if(src){img.src=src;img.hidden=false;$('#photoPh').hidden=true;$('#photoDel').hidden=false}else{img.hidden=true;img.removeAttribute('src');$('#photoPh').hidden=false;$('#photoDel').hidden=true}}
+$('#photoFile').onchange=function(){
+  var f=this.files&&this.files[0];this.value='';if(!f)return;msg('info','照片上傳中…');
+  resize(f,1000).then(function(blob){return blobB64(blob).then(function(b64){return upload('images/photo.jpg',b64,'更新照片')}).then(function(){
+    data.photo='images/photo.jpg?v='+Date.now();delete toDelete['images/photo.jpg'];showPhoto(URL.createObjectURL(blob));setDirty(true);
+    msg('ok','照片已上傳。按下方「儲存並發布」後，網站就會換上新照片。');
+  })}).catch(function(e){msg('bad',e.status!=null?explain(e):e.message)});
+};
+$('#photoDel').onclick=function(){if(confirm('確定要從網站移除照片嗎？')){if(data.photo)toDelete[bare(data.photo)]=1;data.photo='';showPhoto(null);setDirty(true)}};
+$('#galFile').onchange=function(){
+  var fs=Array.prototype.slice.call(this.files||[]);this.value='';if(!fs.length)return;
+  var done=0,chain=Promise.resolve();
+  fs.forEach(function(f){chain=chain.then(function(){
+    msg('info','照片上傳中…（'+(done+1)+' / '+fs.length+'）');
+    return resize(f,1600).then(function(blob){var path='images/gallery/'+Date.now()+'-'+Math.random().toString(36).slice(2,7)+'.jpg';
+      return blobB64(blob).then(function(b64){return upload(path,b64,'新增相簿照片')}).then(function(){data.gallery.push({src:path,caption:'',_preview:URL.createObjectURL(blob)});done++;setDirty(true);renderGallery()})});
+  })});
+  chain.then(function(){msg('ok','已上傳 '+done+' 張照片。可以替每張加上說明，再按「儲存並發布」。')}).catch(function(e){msg('bad',(e.status!=null?explain(e):e.message)+(done?'（前 '+done+' 張已上傳）':''))});
+};
+function showResume(){var f=data.resume.file;$('#resumeNow').textContent=f?'目前已上傳履歷，網站上會出現下載按鈕。':'目前沒有履歷檔。';$('#resumeDel').hidden=!f}
+$('#resumeFile').onchange=function(){
+  var f=this.files&&this.files[0];this.value='';if(!f)return;
+  if(f.size>10*1024*1024){msg('bad','PDF 超過 10 MB，請先壓縮再上傳。');return}
+  if(!/pdf$/i.test(f.type)&&!/\.pdf$/i.test(f.name)){msg('bad','請選擇 PDF 檔。');return}
+  msg('info','履歷上傳中…');
+  blobB64(f).then(function(b64){return upload('files/resume.pdf',b64,'更新履歷')}).then(function(){data.resume.file='files/resume.pdf?v='+Date.now();delete toDelete['files/resume.pdf'];showResume();setDirty(true);msg('ok','履歷已上傳。按「儲存並發布」後，網站就會出現下載按鈕。')}).catch(function(e){msg('bad',explain(e))});
+};
+$('#resumeDel').onclick=function(){if(confirm('確定要從網站移除履歷嗎？')){if(data.resume.file)toDelete[bare(data.resume.file)]=1;data.resume.file='';showResume();setDirty(true)}};
+
+/* ---------- save ---------- */
+function waitLive(stamp){
+  var tries=0;
+  (function poll(){
+    tries++;
+    fetch('../content.json?check='+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){
+      if(j.updated===stamp){msg('ok','網站已經更新完成！',['打開網站看看',siteUrl()]);return}
+      if(tries<60)setTimeout(poll,5000);else msg('info','已儲存。GitHub 還在發布中，通常幾分鐘內就會更新。',['打開網站',siteUrl()]);
+    }).catch(function(){if(tries<60)setTimeout(poll,5000)});
+  })();
+}
+$('#saveBtn').onclick=function(){
+  if(busy)return;
+  var bad=validate();if(bad){msg('bad',bad);return}
+  busy=true;$('#saveBtn').disabled=true;$('#saveBtn').textContent='發布中…';
+  var d=collect();d.updated=nowIso();
+  putFile('content.json',b64utf8(JSON.stringify(d,function(k,v){return k.charAt(0)==='_'?undefined:v},2)+'\n'),'更新網站內容',sha.content).then(function(r){
+    sha.content=r.content.sha;setDirty(false);renderChapters();Object.keys(MODS).forEach(renderMod);renderLinks();
+    var v=buildVcf(d);
+    if(v===lastVcf)return;
+    return putFile('contact.vcf',b64utf8(v),'更新聯絡人檔',sha.vcf).then(function(r2){sha.vcf=r2.content.sha;lastVcf=v});
+  }).then(function(){
+    var dels=Object.keys(toDelete);toDelete={};
+    return dels.reduce(function(p,path){return p.then(function(){return removeFile(path).catch(function(){})})},Promise.resolve());
+  }).then(function(){
+    msg('info','已儲存！GitHub 正在發布，通常 1～3 分鐘網站就會更新，這頁會自動通知你。');
+    waitLive(d.updated);
+  }).catch(function(e){msg('bad',explain(e))}).then(function(){busy=false;$('#saveBtn').disabled=false;$('#saveBtn').textContent='儲存並發布'});
+};
+window.addEventListener('beforeunload',function(e){if(dirty){e.preventDefault();e.returnValue=''}});
+
+/* ---------- site update (zip installer) ---------- */
+function showVersion(){fetch('../version.json?v='+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(v){$('#verNow').textContent='目前網站版本：'+v.version+'（'+v.date+'）';document.querySelector('[data-p="update"] .st').textContent='版本 '+v.version}).catch(function(){$('#verNow').textContent=''})}
+function unzip(buf){
+  var dv=new DataView(buf),u8=new Uint8Array(buf),eocd=-1;
+  for(var i=u8.length-22;i>=Math.max(0,u8.length-65557);i--){if(dv.getUint32(i,true)===0x06054b50){eocd=i;break}}
+  if(eocd<0)return Promise.reject(new Error('這不是有效的 zip 檔。'));
+  var count=dv.getUint16(eocd+10,true),off=dv.getUint32(eocd+16,true),list=[];
+  for(var n=0;n<count;n++){
+    if(dv.getUint32(off,true)!==0x02014b50)return Promise.reject(new Error('zip 檔格式錯誤。'));
+    var method=dv.getUint16(off+10,true),csize=dv.getUint32(off+20,true),nlen=dv.getUint16(off+28,true),elen=dv.getUint16(off+30,true),clen=dv.getUint16(off+32,true),lho=dv.getUint32(off+42,true);
+    var name=new TextDecoder().decode(u8.subarray(off+46,off+46+nlen));off+=46+nlen+elen+clen;
+    if(/\/$/.test(name))continue;
+    var start=lho+30+dv.getUint16(lho+26,true)+dv.getUint16(lho+28,true);
+    list.push({path:name,method:method,comp:u8.subarray(start,start+csize)});
+  }
+  return list.reduce(function(p,f){return p.then(function(out){
+    if(f.method===0){out.push({path:f.path,data:f.comp.slice()});return out}
+    if(f.method!==8)throw new Error('不支援的壓縮格式：'+f.path);
+    if(typeof DecompressionStream==='undefined')throw new Error('這個瀏覽器太舊，無法安裝更新。請改用電腦版 Chrome，或把手機系統更新到最新版。');
+    return new Response(new Blob([f.comp]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).arrayBuffer().then(function(ab){out.push({path:f.path,data:new Uint8Array(ab)});return out});
+  })},Promise.resolve([]));
+}
+function planUpdate(files){
+  files=files.filter(function(f){return !/(^|\/)(__MACOSX|\.DS_Store|Thumbs\.db)/.test(f.path)});
+  var first=files.length&&files[0].path.split('/')[0];
+  if(first&&files.every(function(f){return f.path.indexOf(first+'/')===0})&&files.some(function(f){return f.path===first+'/index.html'}))files=files.map(function(f){return {path:f.path.slice(first.length+1),data:f.data}});
+  var ok=[],skip=[];
+  files.forEach(function(f){if(!f.path||/(^|\/)\.\.(\/|$)|^\//.test(f.path))skip.push(f.path);else if(PROTECT.test(f.path))skip.push(f.path);else if(!OKEXT.test(f.path)&&f.path!=='.nojekyll')skip.push(f.path);else ok.push(f)});
+  return {ok:ok,skip:skip};
+}
+function commitFiles(files,message){
+  var branch,parent,base;
+  return gh(R('')).then(function(r){branch=r.default_branch||'main';return gh(R('/git/ref/heads/'+branch))})
+  .then(function(ref){parent=ref.object.sha;return gh(R('/git/commits/'+parent))})
+  .then(function(c){base=c.tree.sha;
+    return files.reduce(function(p,f){return p.then(function(tree){return gh(R('/git/blobs'),{method:'POST',body:JSON.stringify({content:b64FromBytes(f.data),encoding:'base64'})}).then(function(b){tree.push({path:f.path,mode:'100644',type:'blob',sha:b.sha});return tree})})},Promise.resolve([]));
+  }).then(function(tree){return gh(R('/git/trees'),{method:'POST',body:JSON.stringify({base_tree:base,tree:tree})})})
+  .then(function(t){return gh(R('/git/commits'),{method:'POST',body:JSON.stringify({message:message,tree:t.sha,parents:[parent]})})})
+  .then(function(c){return gh(R('/git/refs/heads/'+branch),{method:'PATCH',body:JSON.stringify({sha:c.sha})})});
+}
+$('#zipFile').onchange=function(){
+  var f=this.files&&this.files[0];this.value='';if(!f)return;
+  if(dirty){msg('bad','請先按「儲存並發布」把目前的修改存起來，再安裝更新。');return}
+  msg('info','讀取更新檔中…');
+  f.arrayBuffer().then(unzip).then(function(files){
+    var plan=planUpdate(files);if(!plan.ok.length)throw new Error('更新檔裡沒有可以安裝的網站檔案。');
+    zipFiles=plan.ok;clearMsg();
+    var L=$('#zipList');L.textContent='';L.appendChild(el('div',null,'將更新 '+plan.ok.length+' 個檔案：'));plan.ok.forEach(function(x){L.appendChild(el('div',null,'・'+x.path))});
+    if(plan.skip.length){L.appendChild(el('div',null,'不會動到（你的內容或不支援的檔案）：'));plan.skip.forEach(function(x){L.appendChild(el('div',null,'・'+x))})}
+    $('#zipInfo').hidden=false;$('#zipInfo').scrollIntoView({behavior:'smooth',block:'center'});
+  }).catch(function(e){msg('bad',e.message)});
+};
+$('#zipCancel').onclick=function(){zipFiles=null;$('#zipInfo').hidden=true};
+$('#zipGo').onclick=function(){
+  if(!zipFiles||busy)return;busy=true;$('#zipGo').disabled=true;$('#zipGo').textContent='更新中…';
+  commitFiles(zipFiles,'安裝網站更新').then(function(){
+    zipFiles=null;$('#zipInfo').hidden=true;
+    msg('ok','更新已安裝！1～3 分鐘後網站就會換成新版本。等一下重新整理這一頁，就會看到新版編輯器。',['打開網站',siteUrl()]);
+    setTimeout(showVersion,60000);
+  }).catch(function(e){msg('bad',explain(e))}).then(function(){busy=false;$('#zipGo').disabled=false;$('#zipGo').textContent='開始更新'});
+};
+
+/* ---------- login ---------- */
+function load(){
+  msg('info','讀取網站資料中…');
+  return gh(contents('content.json')).then(function(r){
+    data=JSON.parse(utf8b64(r.content));sha.content=r.sha;
+    return gh(contents('contact.vcf')).then(function(v){sha.vcf=v.sha;lastVcf=utf8b64(v.content)},function(e){if(e.status!==404)throw e});
+  }).then(function(){
+    fill();clearMsg();showVersion();$('#login').hidden=true;$('#editor').hidden=false;$('#savebar').hidden=false;$('#logout').hidden=false;
+  });
+}
+function start(t,remember){
+  token=t;
+  load().then(function(){try{(remember?localStorage:sessionStorage).setItem('ghToken',t)}catch(e){}}).catch(function(e){
+    token=null;clearMsg();$('#login').hidden=false;$('#editor').hidden=true;$('#savebar').hidden=true;
+    var le=$('#loginErr');le.textContent=explain(e,'load');le.hidden=false;
+    try{localStorage.removeItem('ghToken');sessionStorage.removeItem('ghToken')}catch(x){}
+  });
+}
+$('#loginBtn').onclick=function(){var t=$('#token').value.trim();$('#loginErr').hidden=true;if(!t){var le=$('#loginErr');le.textContent='請先貼上金鑰。';le.hidden=false;return}start(t,$('#remember').checked)};
+$('#token').onkeydown=function(e){if(e.key==='Enter')$('#loginBtn').click()};
+$('#logout').onclick=function(){if(dirty&&!confirm('還有未儲存的修改，確定要登出嗎？'))return;try{localStorage.removeItem('ghToken');sessionStorage.removeItem('ghToken')}catch(e){}dirty=false;location.reload()};
+
+if(!OWNER){msg('bad','這個編輯器要放在 GitHub Pages 網站（xxx.github.io/admin/）上才能使用。');return}
+$('#siteLink').href=siteUrl();
+var saved=null,rem=false;try{saved=localStorage.getItem('ghToken');rem=!!saved;if(!saved)saved=sessionStorage.getItem('ghToken')}catch(e){}
+if(saved)start(saved,rem);else $('#login').hidden=false;
+})();
+</script>
+</body>
+</html>

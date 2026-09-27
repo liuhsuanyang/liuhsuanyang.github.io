@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>劉軒仰｜個人網站</title>
+<meta name="description" content="劉軒仰（Liu Hsuan-Yang）的個人網站：經歷、學歷、證照、技能、專案與聯絡方式。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://liuhsuanyang.github.io/">
+<meta property="og:title" content="劉軒仰｜個人網站">
+<meta property="og:description" content="一座橋，一塊一塊砌起來。看看我的經歷、學歷、證照、技能與專案。">
+<meta property="og:image" content="https://liuhsuanyang.github.io/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#1A3A30">
+<meta name="site-version" content="4.0">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:"TWKai";src:url(assets/kai.woff2) format("woff2");font-display:swap}
+:root{--g:#1A3A30;--gold:#C9AB6E;--gold-ink:#7B6636;--sage:#98AFA5;--iv:#F3EFE6;--iv2:#EAE3D3;--ink:#1E2B26;--mut:#5B6B63;--line:#DDD5C5;--hero:#EDE8DC;--bar:76px}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:calc(var(--bar) + 12px)}
+body{margin:0;background:var(--iv);color:var(--ink);font:16px/1.8 "Noto Sans TC",system-ui,-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif}
+a{color:inherit}
+[hidden]{display:none!important}
+.wrap{max-width:720px;margin:0 auto;padding:0 22px}
+.kai{font-family:"TWKai","Noto Serif TC",serif!important;font-weight:400!important}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;padding:11px 20px;font:500 15px/1.2 "Noto Sans TC",sans-serif;cursor:pointer;text-decoration:none;border:1px solid var(--gold);background:transparent;color:var(--gold)}
+.btn svg{width:18px;height:18px;flex:none}
+.btn.solid{background:var(--gold);color:var(--g)}
+.btn:focus-visible,.pill:focus-visible,.icb:focus-visible,.acc .head:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.light .btn,.story .btn{color:var(--g);border-color:var(--g)}
+.light .btn.solid,.story .btn.solid{background:var(--gold);border-color:var(--gold);color:var(--g)}
+.row{display:flex;flex-wrap:wrap;gap:10px}
+.center{justify-content:center}
+.ico{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+.hero{position:relative;background:var(--g);color:var(--hero);padding:calc(52px + env(safe-area-inset-top)) 0 30px;text-align:center}
+.topbar{position:absolute;top:calc(12px + env(safe-area-inset-top));right:12px;display:flex;gap:6px}
+.icb{width:40px;height:40px;border-radius:50%;border:1px solid rgba(237,232,220,.25);background:transparent;color:var(--hero);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.icb .ico{width:19px;height:19px}
+.logo{width:min(72%,280px);height:auto;display:block;margin:0 auto;overflow:visible}
+.logo .s,.sb .w1,.sb .w0,.sb .gr,.logo .gr{fill:#2C5042}.logo .r,.sb .v{fill:#3A6553}.logo .c,.sb .cp{fill:#335A4A}.logo .k,.sb .key{fill:var(--gold)}
+.name{font:400 clamp(46px,14vw,68px)/1.1 "TWKai","Noto Serif TC",serif;color:var(--gold);letter-spacing:.06em;margin:20px 0 0}
+.en{font:600 12.5px/1 "Cinzel",serif;letter-spacing:.28em;color:var(--sage);margin:12px 0 0}
+.tagline{font-size:16.5px;line-height:1.8;margin:20px auto 4px;max-width:26em;text-wrap:balance}
+.headline{font-size:13.5px;color:var(--sage);margin:0}
+.status{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:5px 14px;border-radius:999px;background:rgba(201,171,110,.14);color:var(--gold);font-size:13.5px}
+.status:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--gold)}
+.cta{margin-top:22px}
+.pills{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:14px}
+.pills.left{justify-content:flex-start}
+.pill{display:inline-flex;align-items:center;border:1px solid rgba(201,171,110,.5);color:var(--hero);border-radius:999px;padding:6px 14px;font:500 13.5px/1.3 "Noto Sans TC",sans-serif;text-decoration:none;background:transparent;cursor:pointer}
+.pill:hover{border-color:var(--gold);color:var(--gold)}
+.hint{display:inline-flex;flex-direction:column;align-items:center;gap:2px;margin-top:26px;color:var(--sage);font-size:13px;text-decoration:none}
+.hint b{font-weight:400;font-size:18px;animation:bob 2.2s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+
+.story{position:relative}
+.sbar{position:sticky;top:0;z-index:5;background:var(--g);color:var(--hero);border-top:1px solid rgba(237,232,220,.08)}
+.sbar-in{display:flex;align-items:center;gap:16px;height:var(--bar)}
+.sb{width:168px;height:auto;flex:none;overflow:visible}
+.slabel{min-width:0;display:flex;flex-direction:column;line-height:1.35}
+#sNo{color:var(--gold);font-size:12px;letter-spacing:.12em}
+#sTitle{font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sprog{height:2px;background:rgba(201,171,110,.18)}
+.sprog i{display:block;height:100%;width:0;background:var(--gold);transition:width .2s linear}
+@media (min-width:560px){.sb{width:200px}:root{--bar:88px}}
+.js .sb .v,.js .sb .key,.js .sb .w0,.js .sb .cp{opacity:0;transform:translateY(-8px);transition:opacity .5s ease,transform .55s cubic-bezier(.2,.8,.2,1),fill .4s}
+.js .sb .v.on,.sb.done .v{opacity:1;transform:none}
+.sb .v{cursor:pointer}.sb .v.now{fill:#5A8A74}
+.js .sb .key{transform:translateY(-26px)}
+.sb.done .key{opacity:1;transform:none;transition:transform .7s cubic-bezier(.34,1.56,.64,1),opacity .25s}
+.sb.done .w0,.sb.done .cp{opacity:1;transform:none;transition-delay:.5s}
+.sb .cen{fill:none;stroke:var(--sage);stroke-width:1;stroke-dasharray:2.4 2;opacity:.8;transition:opacity .6s .3s}
+.sb.done .cen{opacity:0}
+
+.ch{padding:52px 0 22px;min-height:34vh;scroll-margin-top:calc(var(--bar) + 8px)}
+.ch.intro{min-height:0;padding:44px 0 6px}
+.ch.intro p{font-size:17px;line-height:1.9;color:#3F4F48;margin:0;text-wrap:pretty}
+.ch-no{margin:0;color:var(--gold-ink);font-size:13px;letter-spacing:.14em}
+.ch-title,.sec h2{font:600 32px/1.3 "Noto Serif TC",serif;color:var(--g);margin:6px 0 10px}
+.ch-title.kai,.sec h2.kai{font-size:36px}
+.ch-lead{margin:0;color:#3F4F48;font-size:16.5px;max-width:32em}
+.items{margin-top:22px;border-top:1px solid var(--line)}
+.acc{border-bottom:1px solid var(--line)}
+.acc .head{list-style:none;display:flex;align-items:center;gap:14px;padding:16px 2px;cursor:pointer}
+.acc .head::-webkit-details-marker{display:none}
+.acc.static .head{cursor:default}
+.acc .hd{flex:1;min-width:0}
+.acc .t{display:block;font-size:17px;font-weight:700;line-height:1.5}
+.acc .o{display:block;font-size:14px;color:var(--mut);margin-top:1px}
+.acc .chev{width:30px;height:30px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--gold-ink);flex:none;transition:transform .25s ease,background .2s}
+.acc .chev .ico{width:16px;height:16px}
+.acc[open] .chev{transform:rotate(180deg);background:var(--iv2)}
+.acc .bd{padding:0 2px 18px;animation:accIn .3s ease}
+@keyframes accIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.acc .per{margin:0;color:var(--gold-ink);font-size:13px}
+.desc p{margin:6px 0 0;font-size:15.5px;line-height:1.8}
+.acc .btn{margin-top:12px;padding:8px 16px;font-size:14px}
+.chips{display:flex;flex-wrap:wrap;gap:9px;list-style:none;padding:0;margin:24px 0 0}
+.chips li{background:var(--iv2);border-radius:999px;padding:6px 15px;font-size:15px}
+.js .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.8,.2,1)}
+.js .reveal.in{opacity:1;transform:none}
+.keystone{text-align:center;min-height:0;padding:64px 0 60px}
+.keystone .ch-lead{margin:0 auto}
+.keystone .ch-lead p{margin:0 0 10px}
+.ks-mark{width:46px;height:36px;margin:0 auto 12px;background:var(--gold);-webkit-clip-path:polygon(0 0,100% 0,78% 100%,22% 100%);clip-path:polygon(0 0,100% 0,78% 100%,22% 100%)}
+.photo{width:124px;height:124px;border-radius:50%;object-fit:cover;object-position:center 30%;border:3px solid var(--gold);display:block;margin:0 auto 18px}
+
+.sec{padding:54px 0;border-top:1px solid var(--line)}
+.sec.dark{border-top:0}
+.note{color:var(--mut);margin:0 0 16px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:18px}
+@media (min-width:640px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.grid button{padding:0;border:0;background:none;cursor:zoom-in;text-align:left;font:inherit;color:inherit}
+.grid img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:10px;display:block;background:var(--iv2)}
+.grid span{display:block;font-size:13px;color:var(--mut);margin-top:4px;line-height:1.5}
+.vid{margin-top:18px}
+.vid .fr{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000}
+.vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vid p{margin:8px 0 0;font-weight:500}
+.quote{margin:18px 0 0;padding:18px 20px;background:#FBF9F4;border:1px solid var(--line);border-radius:14px}
+.quote p{margin:0;font-size:15.5px}
+.quote p:first-child:before{content:"「";color:var(--gold-ink)}
+.quote p:last-of-type:after{content:"」";color:var(--gold-ink)}
+.quote footer{background:none;padding:0;margin-top:10px;text-align:left;color:var(--mut);font-size:14px;border:0}
+.faq details{border-top:1px solid var(--line);padding:4px 0}
+.faq details:first-of-type{border-top:0}
+.faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:12px;padding:12px 0;font-weight:500}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:after{content:"＋";color:var(--gold-ink)}
+.faq details[open] summary:after{content:"－"}
+.faq .ans p{margin:0 0 12px;color:#3F4F48}
+.frame{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}
+.frame iframe{display:block;width:100%;height:480px;border:0}
+.sec .btn{margin-top:14px}
+.dark{background:var(--g);color:var(--hero)}
+.dark h2{color:var(--gold)!important}
+.dark .note{color:var(--sage)}
+.dark .row{justify-content:flex-start}
+.mailtext{margin:14px 0 0;color:var(--sage);user-select:all}
+.foot{background:var(--g);color:var(--sage);font-size:12.5px;line-height:1.8;text-align:center;padding:10px 20px calc(30px + env(safe-area-inset-bottom));border-top:1px solid rgba(237,232,220,.08)}
+.foot p{margin:2px 0}
+.err{padding:48px 0;color:var(--mut);text-align:center}
+.skip{position:absolute;left:-9999px;top:0}.skip:focus{left:12px;top:12px;z-index:9;background:var(--iv);padding:8px 12px;border-radius:8px}
+.modal{position:fixed;inset:0;z-index:50;background:rgba(10,20,16,.72);display:flex;align-items:center;justify-content:center;padding:20px}
+.mbox{background:var(--iv);color:var(--ink);border-radius:18px;padding:22px;max-width:340px;width:100%;text-align:center}
+.mbox svg.qr{width:220px;height:220px;display:block;margin:6px auto 10px}
+.mbox p{margin:0 0 14px;color:var(--mut);font-size:14px;word-break:break-all}
+.mbox .row{justify-content:center}
+.mbox .btn{color:var(--g);border-color:var(--g)}
+.mbox .btn.solid{background:var(--gold);border-color:var(--gold)}
+.lb{position:fixed;inset:0;z-index:50;background:rgba(10,20,16,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px}
+.lb img{max-width:100%;max-height:78vh;border-radius:8px}
+.lb p{color:var(--hero);margin:12px 0 0;text-align:center}
+.lb .icb{position:absolute;top:calc(14px + env(safe-area-inset-top));right:14px}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--g);color:var(--hero);padding:10px 18px;border-radius:999px;font-size:14px;z-index:60;box-shadow:0 6px 20px rgba(0,0,0,.2)}
+@media (prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;animation:none!important;scroll-behavior:auto!important}.js .reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<a class="skip" href="#contact">直接看聯絡方式</a>
+<header class="hero" id="top">
+  <div class="topbar">
+    <button class="icb" type="button" id="shareBtn" aria-label="分享這個網站"></button>
+    <button class="icb" type="button" id="qrBtn" aria-label="顯示網站 QR code"></button>
+  </div>
+  <div class="wrap">
+    <svg class="logo" viewBox="-8 14 216 64" role="img" aria-label="石拱橋與拱心石標誌"><rect class="gr" x="-6" y="73" width="212" height="1.8"/><polygon class="s" points="2.9,69.2 21.2,69.2 21.2,52.1 6.9,52.1"/><polygon class="s" points="22.8,69.2 26.7,69.2 29.0,65.3 31.4,61.6 32.6,59.8 35.3,56.4 39.0,52.1 22.8,52.1"/><polygon class="s" points="161.0,52.1 164.7,56.4 167.4,59.8 168.6,61.6 171.0,65.3 173.3,69.2 181.2,69.2 181.2,52.1"/><polygon class="s" points="182.8,52.1 182.8,69.2 197.1,69.2 193.1,52.1"/><polygon class="s" points="11.3,33.5 7.3,50.6 40.4,50.6 41.2,49.8 41.2,33.5"/><polygon class="s" points="42.8,48.3 45.9,45.4 49.3,42.7 51.1,41.4 54.7,38.9 56.5,37.8 60.3,35.6 64.5,33.5 42.8,33.5"/><polygon class="s" points="161.2,33.5 135.5,33.5 137.8,34.6 141.6,36.7 145.3,38.9 148.9,41.4 150.7,42.7 154.1,45.4 157.3,48.4 159.6,50.6 161.2,50.6"/><polygon class="s" points="192.7,50.6 188.7,33.5 162.8,33.5 162.8,50.6"/><polygon class="r" points="166.9,63.1 164.3,59.4 161.6,56.1 158.8,53.0 156.6,50.8 149.3,58.3 151.1,60.2 153.6,63.0 155.9,65.8 158.2,69.0"/><polygon class="r" points="137.2,48.9 139.9,50.7 142.9,52.8 145.8,55.1 148.2,57.3 155.5,49.7 152.6,47.2 149.3,44.5 145.9,42.0 142.7,39.9"/><polygon class="r" points="141.4,39.1 136.8,36.6 132.9,34.8 129.0,33.1 126.7,32.3 123.4,42.2 127.0,43.6 130.4,45.1 133.6,46.8 135.9,48.1"/><polygon class="r" points="125.3,31.8 121.0,30.5 116.8,29.5 112.7,28.7 109.6,28.3 108.4,38.8 111.0,39.1 114.7,39.8 118.2,40.7 122.0,41.8"/><polygon class="r" points="90.4,28.3 85.2,29.1 81.1,30.0 77.0,31.1 74.7,31.8 78.0,41.8 81.8,40.7 85.3,39.8 89.0,39.1 91.6,38.8"/><polygon class="r" points="73.3,32.3 69.0,33.9 65.1,35.6 61.3,37.6 58.6,39.1 64.1,48.1 66.4,46.8 69.6,45.1 73.0,43.6 76.6,42.2"/><polygon class="r" points="44.5,49.7 51.8,57.3 54.2,55.1 57.1,52.8 60.1,50.7 62.8,48.9 57.3,39.9 54.1,42.0 50.7,44.5 47.4,47.2"/><polygon class="r" points="43.4,50.8 39.8,54.6 37.0,57.8 34.5,61.1 33.1,63.1 41.8,69.0 44.1,65.8 46.4,63.0 48.9,60.2 50.7,58.3"/><polygon class="c" points="191.0,27.0 109.7,27.0 109.7,27.3 115.0,28.1 119.2,29.0 123.3,30.1 126.8,31.2 191.0,31.2"/><polygon class="c" points="9.0,31.2 73.2,31.2 76.7,30.1 80.8,29.0 85.0,28.1 90.3,27.3 90.3,27.0 9.0,27.0"/><polygon class="k" points="91.4,23.2 93.1,38.6 96.3,38.3 100.0,38.2 103.7,38.3 106.9,38.6 108.6,23.2"/></svg>
+    <h1 class="name" id="name">劉軒仰</h1>
+    <p class="en" id="nameEn">LIU HSUAN-YANG</p>
+    <p class="tagline" id="tagline"></p>
+    <p class="headline" id="headline"></p>
+    <p class="status" id="status" hidden></p>
+    <div class="cta" id="heroCta"></div>
+    <a class="hint" href="#story">往下滑，看這座橋怎麼砌起來<b aria-hidden="true">↓</b></a>
+  </div>
+</header>
+<main>
+  <section class="story" id="story" aria-label="我的故事">
+    <div class="sbar" aria-hidden="true">
+      <div class="wrap sbar-in">
+        <svg class="sb" id="sb" viewBox="-8 14 216 64"></svg>
+        <div class="slabel"><span id="sNo"></span><span id="sTitle">往下滑，開始砌橋</span></div>
+      </div>
+      <div class="sprog"><i id="sProg"></i></div>
+    </div>
+    <div class="wrap" id="chapters"><noscript><p class="err">這個網站需要開啟 JavaScript 才能顯示內容。</p></noscript></div>
+  </section>
+  <section class="sec light" id="news" hidden><div class="wrap"></div></section>
+  <section class="sec light" id="gallery" hidden><div class="wrap"></div></section>
+  <section class="sec light" id="videos" hidden><div class="wrap"></div></section>
+  <section class="sec light" id="testimonials" hidden><div class="wrap"></div></section>
+  <section class="sec light faq" id="faq" hidden><div class="wrap"></div></section>
+  <section class="sec light" id="calendar" hidden><div class="wrap"></div></section>
+  <section class="sec light" id="form" hidden><div class="wrap"></div></section>
+  <section class="sec dark" id="contact"><div class="wrap"></div></section>
+</main>
+<div class="foot">
+  <p>© <span id="year">2026</span> <span id="fname">劉軒仰</span>　·　最後更新 <span id="updated">—</span></p>
+  <p>中文字型：全字庫正楷體（數位發展部，政府資料開放授權條款第 1 版）</p>
+  <p><a href="admin/">編輯網站</a></p>
+</div>
+<div class="modal" id="qrModal" hidden role="dialog" aria-modal="true" aria-label="網站 QR code">
+  <div class="mbox">
+    <svg class="qr" viewBox="-2 -2 29 29" aria-hidden="true"><rect x="-2" y="-2" width="29" height="29" fill="#fff"/><path d="M0 0.5h7m2 0h1m2 0h2m2 0h1m1 0h7m-25 1h1m5 0h1m3 0h1m2 0h1m1 0h1m2 0h1m5 0h1m-25 1h1m1 0h3m1 0h1m2 0h1m2 0h1m1 0h3m1 0h1m1 0h3m1 0h1m-25 1h1m1 0h3m1 0h1m2 0h1m1 0h4m1 0h1m1 0h1m1 0h3m1 0h1m-25 1h1m1 0h3m1 0h1m3 0h2m1 0h3m2 0h1m1 0h3m1 0h1m-25 1h1m5 0h1m1 0h2m4 0h2m2 0h1m5 0h1m-25 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-15 1h3m1 0h1m1 0h1m-17 1h1m2 0h1m1 0h2m1 0h3m2 0h1m1 0h1m1 0h1m1 0h1m-19 1h1m1 0h1m4 0h1m1 0h1m1 0h1m2 0h1m1 0h3m3 0h2m-25 1h1m4 0h3m3 0h3m1 0h1m3 0h3m1 0h2m-25 1h1m1 0h1m1 0h1m3 0h1m1 0h1m1 0h2m1 0h2m3 0h1m3 0h1m-25 1h1m2 0h2m1 0h1m1 0h5m1 0h2m1 0h1m1 0h1m2 0h1m-22 1h1m3 0h1m3 0h5m1 0h1m1 0h4m1 0h3m-25 1h1m1 0h1m2 0h2m2 0h1m2 0h1m2 0h1m4 0h1m2 0h1m-23 1h1m1 0h1m3 0h1m1 0h1m2 0h2m2 0h2m1 0h3m-22 1h5m1 0h2m1 0h3m1 0h2m1 0h7m1 0h1m-17 1h1m1 0h1m3 0h1m1 0h1m3 0h1m1 0h3m-25 1h7m2 0h2m2 0h1m1 0h2m1 0h1m1 0h3m1 0h1m-25 1h1m5 0h1m1 0h2m1 0h1m1 0h1m1 0h2m3 0h1m3 0h1m-25 1h1m1 0h3m1 0h1m2 0h4m1 0h1m1 0h7m-23 1h1m1 0h3m1 0h1m1 0h1m2 0h3m1 0h1m2 0h4m1 0h1m-24 1h1m1 0h3m1 0h1m2 0h1m1 0h4m1 0h1m2 0h1m1 0h2m1 0h1m-25 1h1m5 0h1m3 0h4m1 0h1m6 0h1m1 0h1m-25 1h7m1 0h1m1 0h2m2 0h3m1 0h1m1 0h1m1 0h1m1 0h1" stroke="#1A3A30"/></svg>
+    <p>https://liuhsuanyang.github.io/</p>
+    <div class="row"><button class="btn solid" type="button" id="copyBtn">複製網址</button><button class="btn" type="button" data-close>關閉</button></div>
+  </div>
+</div>
+<div class="lb" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="照片">
+  <button class="icb" type="button" data-close aria-label="關閉"></button>
+  <img alt=""><p></p>
+</div>
+<div class="toast" id="toast" hidden></div>
+<script>
+(function(){
+'use strict';
+var SITE='https://liuhsuanyang.github.io/';
+var BRIDGES={"2":{"w1":["2.9,69.2 21.2,69.2 21.2,52.1 6.9,52.1","22.8,69.2 26.7,69.2 29.0,65.3 31.4,61.6 32.6,59.8 35.3,56.4 39.0,52.1 22.8,52.1","161.0,52.1 164.7,56.4 167.4,59.8 168.6,61.6 171.0,65.3 173.3,69.2 181.2,69.2 181.2,52.1","182.8,52.1 182.8,69.2 197.1,69.2 193.1,52.1"],"w0":["11.3,33.5 7.3,50.6 40.4,50.6 41.2,49.8 41.2,33.5","42.8,48.3 45.9,45.4 49.3,42.7 51.1,41.4 54.7,38.9 56.5,37.8 60.3,35.6 64.5,33.5 42.8,33.5","161.2,33.5 135.5,33.5 137.8,34.6 141.6,36.7 145.3,38.9 148.9,41.4 150.7,42.7 154.1,45.4 157.3,48.4 159.6,50.6 161.2,50.6","192.7,50.6 188.7,33.5 162.8,33.5 162.8,50.6"],"cp":["191.0,27.0 117.0,27.0 116.7,28.4 121.2,29.5 123.3,30.1 126.8,31.2 191.0,31.2","9.0,31.2 73.2,31.2 76.7,30.1 78.8,29.5 83.3,28.4 83.0,27.0 9.0,27.0"],"v":[[0,"166.9,63.1 164.3,59.4 163.0,57.8 160.2,54.6 157.3,51.5 154.2,48.6 151.0,45.8 147.6,43.2 145.6,41.8 139.8,50.6 141.4,51.7 144.4,54.0 147.2,56.4 149.9,58.9 152.4,61.6 154.8,64.4 157.0,67.3 158.2,69.0"],[1,"144.4,41.0 140.5,38.6 138.7,37.6 134.9,35.6 131.0,33.9 127.0,32.4 123.0,31.1 118.9,30.0 116.5,29.5 114.5,39.8 116.5,40.2 120.0,41.2 123.5,42.3 127.0,43.6 130.4,45.1 133.6,46.8 136.8,48.6 138.5,49.7"],[3,"83.5,29.5 79.0,30.5 75.0,31.7 73.0,32.4 69.0,33.9 65.1,35.6 61.3,37.6 57.7,39.7 55.6,41.0 61.5,49.7 63.2,48.6 66.4,46.8 69.6,45.1 73.0,43.6 76.5,42.3 80.0,41.2 83.5,40.2 85.5,39.8"],[4,"54.4,41.8 52.4,43.2 49.0,45.8 45.8,48.6 42.7,51.5 39.8,54.6 37.0,57.8 34.5,61.1 33.1,63.1 41.8,69.0 43.0,67.3 45.2,64.4 47.6,61.6 50.1,58.9 52.8,56.4 55.6,54.0 58.6,51.7 60.2,50.6"]],"k":"83.8,23.2 87.0,39.5 89.0,39.1 92.6,38.6 96.3,38.3 100.0,38.2 103.7,38.3 107.4,38.6 111.0,39.1 113.0,39.5 116.2,23.2","c":"M156.2 71.2 L154.3 68.5 L152.2 65.9 L150.1 63.4 L147.8 61.0 L145.4 58.7 L142.9 56.5 L140.2 54.5 L137.5 52.6 L134.7 50.8 L131.8 49.2 L128.9 47.7 L125.9 46.3 L122.8 45.1 L119.6 44.1 L116.4 43.2 L113.2 42.5 L109.9 41.9 L106.6 41.5 L103.3 41.3 L100.0 41.2 L96.7 41.3 L93.4 41.5 L90.1 41.9 L86.8 42.5 L83.6 43.2 L80.4 44.1 L77.2 45.1 L74.1 46.3 L71.1 47.7 L68.2 49.2 L65.3 50.8 L62.5 52.6 L59.8 54.5 L57.1 56.5 L54.6 58.7 L52.2 61.0 L49.9 63.4 L47.8 65.9 L45.7 68.5 L43.8 71.2 M71.0 47.7 V70.0 M100.0 41.2 V70.0 M129.0 47.7 V70.0"},"3":{"w1":["2.9,69.2 21.2,69.2 21.2,52.1 6.9,52.1","22.8,69.2 26.7,69.2 29.0,65.3 31.4,61.6 32.6,59.8 35.3,56.4 39.0,52.1 22.8,52.1","161.0,52.1 164.7,56.4 167.4,59.8 168.6,61.6 171.0,65.3 173.3,69.2 181.2,69.2 181.2,52.1","182.8,52.1 182.8,69.2 197.1,69.2 193.1,52.1"],"w0":["11.3,33.5 7.3,50.6 40.4,50.6 41.2,49.8 41.2,33.5","42.8,48.3 45.9,45.4 49.3,42.7 51.1,41.4 54.7,38.9 56.5,37.8 60.3,35.6 64.5,33.5 42.8,33.5","161.2,33.5 135.5,33.5 137.8,34.6 141.6,36.7 145.3,38.9 148.9,41.4 150.7,42.7 154.1,45.4 157.3,48.4 159.6,50.6 161.2,50.6","192.7,50.6 188.7,33.5 162.8,33.5 162.8,50.6"],"cp":["191.0,27.0 112.3,27.0 112.2,27.6 115.0,28.1 119.2,29.0 123.3,30.1 126.8,31.2 191.0,31.2","9.0,31.2 73.2,31.2 76.7,30.1 80.8,29.0 85.0,28.1 87.8,27.6 87.7,27.0 9.0,27.0"],"v":[[0,"146.1,55.4 149.9,58.9 152.4,61.6 155.9,65.8 158.2,69.0 166.9,63.1 164.3,59.4 163.0,57.8 160.2,54.6 157.3,51.5 155.8,50.0 152.8,47.4"],[1,"151.7,46.4 147.6,43.2 144.1,40.8 142.3,39.7 138.7,37.6 133.8,35.1 129.5,44.7 133.6,46.8 136.8,48.6 141.4,51.7 144.9,54.4"],[2,"128.1,44.1 132.4,34.5 127.0,32.4 123.0,31.1 121.0,30.5 116.8,29.5 112.1,28.7 110.6,39.1 114.7,39.8 120.0,41.2 123.5,42.3"],[4,"67.6,34.5 71.9,44.1 76.5,42.3 80.0,41.2 85.3,39.8 89.4,39.1 87.9,28.7 83.2,29.5 79.0,30.5 77.0,31.1 73.0,32.4"],[5,"66.2,35.1 63.2,36.6 59.5,38.6 55.9,40.8 52.4,43.2 48.3,46.4 55.1,54.4 58.6,51.7 63.2,48.6 66.4,46.8 70.5,44.7"],[6,"47.2,47.4 44.2,50.0 42.7,51.5 39.8,54.6 38.4,56.1 35.7,59.4 33.1,63.1 41.8,69.0 44.1,65.8 47.6,61.6 50.1,58.9 53.9,55.4"]],"k":"88.7,23.2 90.9,38.8 96.3,38.3 100.0,38.2 103.7,38.3 109.1,38.8 111.3,23.2","c":"M156.2 71.2 L154.3 68.5 L152.2 65.9 L150.1 63.4 L147.8 61.0 L145.4 58.7 L142.9 56.5 L140.2 54.5 L137.5 52.6 L134.7 50.8 L131.8 49.2 L128.9 47.7 L125.9 46.3 L122.8 45.1 L119.6 44.1 L116.4 43.2 L113.2 42.5 L109.9 41.9 L106.6 41.5 L103.3 41.3 L100.0 41.2 L96.7 41.3 L93.4 41.5 L90.1 41.9 L86.8 42.5 L83.6 43.2 L80.4 44.1 L77.2 45.1 L74.1 46.3 L71.1 47.7 L68.2 49.2 L65.3 50.8 L62.5 52.6 L59.8 54.5 L57.1 56.5 L54.6 58.7 L52.2 61.0 L49.9 63.4 L47.8 65.9 L45.7 68.5 L43.8 71.2 M71.0 47.7 V70.0 M100.0 41.2 V70.0 M129.0 47.7 V70.0"},"4":{"w1":["2.9,69.2 21.2,69.2 21.2,52.1 6.9,52.1","22.8,69.2 26.7,69.2 29.0,65.3 31.4,61.6 32.6,59.8 35.3,56.4 39.0,52.1 22.8,52.1","161.0,52.1 164.7,56.4 167.4,59.8 168.6,61.6 171.0,65.3 173.3,69.2 181.2,69.2 181.2,52.1","182.8,52.1 182.8,69.2 197.1,69.2 193.1,52.1"],"w0":["11.3,33.5 7.3,50.6 40.4,50.6 41.2,49.8 41.2,33.5","42.8,48.3 45.9,45.4 49.3,42.7 51.1,41.4 54.7,38.9 56.5,37.8 60.3,35.6 64.5,33.5 42.8,33.5","161.2,33.5 135.5,33.5 137.8,34.6 141.6,36.7 145.3,38.9 148.9,41.4 150.7,42.7 154.1,45.4 157.3,48.4 159.6,50.6 161.2,50.6","192.7,50.6 188.7,33.5 162.8,33.5 162.8,50.6"],"cp":["191.0,27.0 109.7,27.0 109.7,27.3 115.0,28.1 119.2,29.0 123.3,30.1 126.8,31.2 191.0,31.2","9.0,31.2 73.2,31.2 76.7,30.1 80.8,29.0 85.0,28.1 90.3,27.3 90.3,27.0 9.0,27.0"],"v":[[0,"166.9,63.1 164.3,59.4 161.6,56.1 158.8,53.0 156.6,50.8 149.3,58.3 151.1,60.2 153.6,63.0 155.9,65.8 158.2,69.0"],[1,"137.2,48.9 139.9,50.7 142.9,52.8 145.8,55.1 148.2,57.3 155.5,49.7 152.6,47.2 149.3,44.5 145.9,42.0 142.7,39.9"],[2,"141.4,39.1 136.8,36.6 132.9,34.8 129.0,33.1 126.7,32.3 123.4,42.2 127.0,43.6 130.4,45.1 133.6,46.8 135.9,48.1"],[3,"125.3,31.8 121.0,30.5 116.8,29.5 112.7,28.7 109.6,28.3 108.4,38.8 111.0,39.1 114.7,39.8 118.2,40.7 122.0,41.8"],[5,"90.4,28.3 85.2,29.1 81.1,30.0 77.0,31.1 74.7,31.8 78.0,41.8 81.8,40.7 85.3,39.8 89.0,39.1 91.6,38.8"],[6,"73.3,32.3 69.0,33.9 65.1,35.6 61.3,37.6 58.6,39.1 64.1,48.1 66.4,46.8 69.6,45.1 73.0,43.6 76.6,42.2"],[7,"44.5,49.7 51.8,57.3 54.2,55.1 57.1,52.8 60.1,50.7 62.8,48.9 57.3,39.9 54.1,42.0 50.7,44.5 47.4,47.2"],[8,"43.4,50.8 39.8,54.6 37.0,57.8 34.5,61.1 33.1,63.1 41.8,69.0 44.1,65.8 46.4,63.0 48.9,60.2 50.7,58.3"]],"k":"91.4,23.2 93.1,38.6 96.3,38.3 100.0,38.2 103.7,38.3 106.9,38.6 108.6,23.2","c":"M156.2 71.2 L154.3 68.5 L152.2 65.9 L150.1 63.4 L147.8 61.0 L145.4 58.7 L142.9 56.5 L140.2 54.5 L137.5 52.6 L134.7 50.8 L131.8 49.2 L128.9 47.7 L125.9 46.3 L122.8 45.1 L119.6 44.1 L116.4 43.2 L113.2 42.5 L109.9 41.9 L106.6 41.5 L103.3 41.3 L100.0 41.2 L96.7 41.3 L93.4 41.5 L90.1 41.9 L86.8 42.5 L83.6 43.2 L80.4 44.1 L77.2 45.1 L74.1 46.3 L71.1 47.7 L68.2 49.2 L65.3 50.8 L62.5 52.6 L59.8 54.5 L57.1 56.5 L54.6 58.7 L52.2 61.0 L49.9 63.4 L47.8 65.9 L45.7 68.5 L43.8 71.2 M71.0 47.7 V70.0 M100.0 41.2 V70.0 M129.0 47.7 V70.0"},"5":{"w1":["2.9,69.2 21.2,69.2 21.2,52.1 6.9,52.1","22.8,69.2 26.7,69.2 29.0,65.3 31.4,61.6 32.6,59.8 35.3,56.4 39.0,52.1 22.8,52.1","161.0,52.1 164.7,56.4 167.4,59.8 168.6,61.6 171.0,65.3 173.3,69.2 181.2,69.2 181.2,52.1","182.8,52.1 182.8,69.2 197.1,69.2 193.1,52.1"],"w0":["11.3,33.5 7.3,50.6 40.4,50.6 41.2,49.8 41.2,33.5","42.8,48.3 45.9,45.4 49.3,42.7 51.1,41.4 54.7,38.9 56.5,37.8 60.3,35.6 64.5,33.5 42.8,33.5","161.2,33.5 135.5,33.5 137.8,34.6 141.6,36.7 145.3,38.9 148.9,41.4 150.7,42.7 154.1,45.4 157.3,48.4 159.6,50.6 161.2,50.6","192.7,50.6 188.7,33.5 162.8,33.5 162.8,50.6"],"cp":["191.0,27.0 108.1,27.0 108.1,27.1 112.8,27.7 117.1,28.5 121.2,29.5 123.3,30.1 126.8,31.2 191.0,31.2","9.0,31.2 73.2,31.2 76.7,30.1 78.8,29.5 82.9,28.5 87.2,27.7 91.9,27.1 91.9,27.0 9.0,27.0"],"v":[[0,"151.3,60.3 154.8,64.4 157.0,67.3 158.2,69.0 166.9,63.1 165.5,61.1 163.0,57.8 161.6,56.1 158.8,53.0"],[1,"141.8,52.0 145.8,55.1 148.5,57.6 150.2,59.3 157.8,52.0 155.8,50.0 152.6,47.2 151.0,45.8 148.0,43.5"],[2,"146.8,42.6 144.1,40.8 140.5,38.6 135.6,36.0 131.1,45.5 135.3,47.7 138.4,49.6 140.6,51.1"],[3,"129.7,44.8 134.3,35.4 129.0,33.1 125.0,31.7 122.2,30.8 119.4,41.0 121.8,41.7 125.3,42.9"],[4,"117.9,40.6 120.7,30.4 116.8,29.5 114.8,29.1 110.6,28.4 108.0,28.1 107.0,38.6 109.2,38.9 112.8,39.4"],[6,"79.3,30.4 82.1,40.6 87.2,39.4 90.8,38.9 93.0,38.6 92.0,28.1 89.4,28.4 85.2,29.1 83.2,29.5"],[7,"65.7,35.4 70.3,44.8 74.7,42.9 78.2,41.7 80.6,41.0 77.8,30.8 75.0,31.7 71.0,33.1"],[8,"64.4,36.0 59.5,38.6 57.7,39.7 53.2,42.6 59.4,51.1 61.6,49.6 64.7,47.7 68.9,45.5"],[9,"52.0,43.5 49.0,45.8 47.4,47.2 44.2,50.0 42.2,52.0 49.8,59.3 51.5,57.6 54.2,55.1 58.2,52.0"],[10,"41.2,53.0 38.4,56.1 37.0,57.8 34.5,61.1 33.1,63.1 41.8,69.0 43.0,67.3 45.2,64.4 48.7,60.3"]],"k":"93.1,23.2 94.5,38.5 100.0,38.2 105.5,38.5 106.9,23.2","c":"M156.2 71.2 L154.3 68.5 L152.2 65.9 L150.1 63.4 L147.8 61.0 L145.4 58.7 L142.9 56.5 L140.2 54.5 L137.5 52.6 L134.7 50.8 L131.8 49.2 L128.9 47.7 L125.9 46.3 L122.8 45.1 L119.6 44.1 L116.4 43.2 L113.2 42.5 L109.9 41.9 L106.6 41.5 L103.3 41.3 L100.0 41.2 L96.7 41.3 L93.4 41.5 L90.1 41.9 L86.8 42.5 L83.6 43.2 L80.4 44.1 L77.2 45.1 L74.1 46.3 L71.1 47.7 L68.2 49.2 L65.3 50.8 L62.5 52.6 L59.8 54.5 L57.1 56.5 L54.6 58.7 L52.2 61.0 L49.9 63.4 L47.8 65.9 L45.7 68.5 L43.8 71.2 M71.0 47.7 V70.0 M100.0 41.2 V70.0 M129.0 47.7 V70.0"},"6":{"w1":["2.9,69.2 21.2,69.2 21.2,52.1 6.9,52.1","22.8,69.2 26.7,69.2 29.0,65.3 31.4,61.6 32.6,59.8 35.3,56.4 39.0,52.1 22.8,52.1","161.0,52.1 164.7,56.4 167.4,59.8 168.6,61.6 171.0,65.3 173.3,69.2 181.2,69.2 181.2,52.1","182.8,52.1 182.8,69.2 197.1,69.2 193.1,52.1"],"w0":["11.3,33.5 7.3,50.6 40.4,50.6 41.2,49.8 41.2,33.5","42.8,48.3 45.9,45.4 49.3,42.7 51.1,41.4 54.7,38.9 56.5,37.8 60.3,35.6 64.5,33.5 42.8,33.5","161.2,33.5 135.5,33.5 137.8,34.6 141.6,36.7 145.3,38.9 148.9,41.4 150.7,42.7 154.1,45.4 157.3,48.4 159.6,50.6 161.2,50.6","192.7,50.6 188.7,33.5 162.8,33.5 162.8,50.6"],"cp":["191.0,27.0 107.0,27.0 110.7,27.4 112.8,27.7 117.1,28.5 121.2,29.5 123.3,30.1 126.8,31.2 191.0,31.2","9.0,31.2 73.2,31.2 76.7,30.1 78.8,29.5 82.9,28.5 87.2,27.7 89.3,27.4 93.0,27.0 9.0,27.0"],"v":[[0,"152.6,61.8 155.9,65.8 158.2,69.0 166.9,63.1 164.3,59.4 163.0,57.8 160.3,54.7"],[1,"144.9,54.4 148.5,57.6 151.5,60.7 159.3,53.6 155.8,50.0 151.5,46.2"],[2,"150.3,45.3 145.9,42.0 141.5,39.2 136.2,48.3 139.9,50.7 143.7,53.5"],[3,"134.9,47.5 140.2,38.4 136.8,36.6 134.9,35.6 130.6,33.7 126.7,43.5 130.4,45.1"],[4,"116.6,40.2 121.8,41.7 125.3,42.9 129.2,33.2 125.0,31.7 123.0,31.1 118.9,30.0"],[5,"106.1,38.5 111.0,39.1 115.1,39.9 117.5,29.7 112.7,28.7 110.6,28.4 106.9,28.0"],[7,"93.1,28.0 89.4,28.4 87.3,28.7 82.5,29.7 84.9,39.9 89.0,39.1 93.9,38.5"],[8,"81.1,30.0 77.0,31.1 75.0,31.7 70.8,33.2 74.7,42.9 78.2,41.7 83.4,40.2"],[9,"59.8,38.4 65.1,47.5 69.6,45.1 73.3,43.5 69.4,33.7 65.1,35.6 63.2,36.6"],[10,"58.5,39.2 54.1,42.0 49.7,45.3 56.3,53.5 60.1,50.7 63.8,48.3"],[11,"48.5,46.2 44.2,50.0 40.7,53.6 48.5,60.7 51.5,57.6 55.1,54.4"],[12,"39.7,54.7 37.0,57.8 35.7,59.4 33.1,63.1 41.8,69.0 44.1,65.8 47.4,61.8"]],"k":"94.3,23.2 95.4,38.4 100.0,38.2 104.6,38.4 105.7,23.2","c":"M156.2 71.2 L154.3 68.5 L152.2 65.9 L150.1 63.4 L147.8 61.0 L145.4 58.7 L142.9 56.5 L140.2 54.5 L137.5 52.6 L134.7 50.8 L131.8 49.2 L128.9 47.7 L125.9 46.3 L122.8 45.1 L119.6 44.1 L116.4 43.2 L113.2 42.5 L109.9 41.9 L106.6 41.5 L103.3 41.3 L100.0 41.2 L96.7 41.3 L93.4 41.5 L90.1 41.9 L86.8 42.5 L83.6 43.2 L80.4 44.1 L77.2 45.1 L74.1 46.3 L71.1 47.7 L68.2 49.2 L65.3 50.8 L62.5 52.6 L59.8 54.5 L57.1 56.5 L54.6 58.7 L52.2 61.0 L49.9 63.4 L47.8 65.9 L45.7 68.5 L43.8 71.2 M71.0 47.7 V70.0 M100.0 41.2 V70.0 M129.0 47.7 V70.0"}};
+var KAI="、一下不事享人介他仰作來個們值傳價其分到創劉力動務去及合告和品問喜器回團執報塊夢始學實寫專導就履工常幹座式影後得心志念怎性想態成我戰找技投拱挑推攝放故教文新於旅時景曆書最服未格案業榮樂標橋歡歷比況活照片特獎獲理生留畫發的目相石砌研社程究站競簡簿紹絡給經網編習聯育背能自與興著薦行表見言計設評語說課論證譽讀財資質賽起趣軒載輯近這進運那部長開間閱關隊集面音頁領題首驗麼";
+var P={
+ mail:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
+ phone:'<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/>',
+ chat:'<path d="M4 5h16v11H10l-5 4v-4H4z"/>',
+ camera:'<rect x="3" y="6" width="18" height="14" rx="3"/><circle cx="12" cy="13" r="3.5"/><path d="M8.5 6 10 4h4l1.5 2"/>',
+ users:'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.6a3.5 3.5 0 0 1 0 6.8M18.5 14.5A6.5 6.5 0 0 1 21.5 20"/>',
+ bubble:'<path d="M12 3.5c-5 0-8.5 3.4-8.5 7.8 0 2.4 1.1 4.5 2.9 5.9V21l3.3-1.8c.7.2 1.5.3 2.3.3 5 0 8.5-3.4 8.5-7.8S17 3.5 12 3.5z"/>',
+ at:'<circle cx="12" cy="12" r="3.8"/><path d="M15.8 12v1.4a2.6 2.6 0 0 0 5.2 0V12a9 9 0 1 0-3.6 7.2"/>',
+ case:'<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5h6v2M3 12.5h18"/>',
+ play:'<rect x="2.5" y="5" width="19" height="14" rx="4"/><path d="m10 9 5 3-5 3z"/>',
+ code:'<path d="m8 8-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/>',
+ hash:'<path d="M5 9h14M5 15h14M10 4 8 20M16 4l-2 16"/>',
+ send:'<path d="M21 4 3 11l6.5 2.2L12 20l3-4.5 4.5 3.5z"/>',
+ link:'<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',
+ user:'<circle cx="9" cy="8" r="4"/><path d="M2 21a7 7 0 0 1 14 0M19 8v6M16 11h6"/>',
+ share:'<path d="M12 15V3M7.5 7.5 12 3l4.5 4.5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/>',
+ qr:'<rect x="3.5" y="3.5" width="6" height="6" rx="1"/><rect x="14.5" y="3.5" width="6" height="6" rx="1"/><rect x="3.5" y="14.5" width="6" height="6" rx="1"/><path d="M14.5 14.5h2.5V17M20.5 14.5v2.5M17 20.5h3.5M14.5 20.5v-1"/>',
+ cal:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+ down:'<path d="M12 4v11M7 10l5 5 5-5M5 20h14"/>',
+ form:'<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/>',
+ x:'<path d="M6 6l12 12M18 6 6 18"/>',
+ chev:'<path d="m6 9 6 6 6-6"/>'
+};
+var SOCIAL={
+ line:['LINE','chat',function(v){return 'https://line.me/ti/p/~'+v.replace(/^@/,'')}],
+ instagram:['Instagram','camera',function(v){return 'https://www.instagram.com/'+v.replace(/^@/,'')+'/'}],
+ facebook:['Facebook','users',function(v){return 'https://www.facebook.com/'+v}],
+ messenger:['Messenger','bubble',function(v){return 'https://m.me/'+v}],
+ threads:['Threads','at',function(v){return 'https://www.threads.net/@'+v.replace(/^@/,'')}],
+ linkedin:['LinkedIn','case',function(v){return 'https://www.linkedin.com/in/'+v}],
+ youtube:['YouTube','play',function(v){return 'https://www.youtube.com/@'+v.replace(/^@/,'')}],
+ github:['GitHub','code',function(v){return 'https://github.com/'+v}],
+ x:['X','hash',function(v){return 'https://x.com/'+v.replace(/^@/,'')}],
+ telegram:['Telegram','send',function(v){return 'https://t.me/'+v.replace(/^@/,'')}],
+ whatsapp:['WhatsApp','chat',function(v){return 'https://wa.me/'+v.replace(/[^\d]/g,'')}],
+ website:['網站','link',function(v){return v}],
+ other:['連結','link',function(v){return v}]
+};
+var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+document.documentElement.classList.add('js');
+function $(s,r){return (r||document).querySelector(s)}
+function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+function icon(n){return '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true">'+(P[n]||P.link)+'</svg>'}
+function paras(t,c){var d=el('div',c);String(t||'').split(/\n+/).forEach(function(s){s=s.trim();if(s)d.appendChild(el('p',null,s))});return d}
+function safeUrl(u){try{var x=new URL(u,location.href);return /^(https?|mailto|tel):$/.test(x.protocol)?x.href:null}catch(e){return null}}
+function pad(n){return (n<10?'0':'')+n}
+function kai(node){var s=node.textContent.replace(/\s/g,'');if(s&&Array.from(s).every(function(c){return KAI.indexOf(c)>=0}))node.classList.add('kai');return node}
+function email(enc){try{var b=atob(enc||''),a=new Uint8Array(b.length);for(var i=0;i<b.length;i++)a[i]=b.charCodeAt(i);return Array.from(new TextDecoder().decode(a)).reverse().join('')}catch(e){return ''}}
+function has(a){return Array.isArray(a)&&a.length>0}
+function hasContent(c){return c&&((c.type==='tags'&&(c.tags||[]).some(function(t){return String(t).trim()}))||(c.type!=='tags'&&has(c.items)))}
+function toast(t){var e=$('#toast');e.textContent=t;e.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(function(){e.hidden=true},2200)}
+function socialUrl(l){var v=String(l.value||'').trim();if(!v)return null;if(/^https?:\/\//i.test(v))return safeUrl(v);var s=SOCIAL[l.type];return s&&l.type!=='website'&&l.type!=='other'?safeUrl(s[2](v)):null}
+function sec(id,title){var s=$('#'+id),w=$('.wrap',s);w.textContent='';s.hidden=false;w.appendChild(kai(el('h2',null,title)));return w}
+
+/* ---------- modal & sharing ---------- */
+var lastFocus=null;
+function openM(m){lastFocus=document.activeElement;m.hidden=false;var b=m.querySelector('[data-close]');if(b)b.focus()}
+function closeM(m){m.hidden=true;if(lastFocus&&lastFocus.focus)lastFocus.focus()}
+document.querySelectorAll('.modal,.lb').forEach(function(m){m.addEventListener('click',function(e){if(e.target===m||e.target.closest('[data-close]'))closeM(m)})});
+addEventListener('keydown',function(e){if(e.key==='Escape')document.querySelectorAll('.modal:not([hidden]),.lb:not([hidden])').forEach(closeM)});
+$('#shareBtn').innerHTML=icon('share');$('#qrBtn').innerHTML=icon('qr');$('#lightbox [data-close]').innerHTML=icon('x');
+function copy(t){if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){toast('已複製網址')},function(){prompt('複製這個網址：',t)})}else prompt('複製這個網址：',t)}
+$('#shareBtn').onclick=function(){var d={title:document.title,text:document.title,url:SITE};if(navigator.share)navigator.share(d).catch(function(){});else copy(SITE)};
+$('#qrBtn').onclick=function(){openM($('#qrModal'))};
+$('#copyBtn').onclick=function(){copy(SITE)};
+
+/* ---------- bridge story ---------- */
+var cur=-1,N=0,steps=[],sb=$('#sb');
+function buildBridge(n){
+  var m=Math.min(6,Math.max(2,n)),d=BRIDGES[m],h='<rect class="gr" x="-6" y="73" width="212" height="1.8"/><path class="cen" d="'+d.c+'"/>';
+  d.w1.forEach(function(p){h+='<polygon class="w1" points="'+p+'"/>'});
+  var nv=2*m+1,K=m;
+  d.v.forEach(function(v){var i=v[0],p=i<K?i:nv-1-i;h+='<polygon class="v" data-p="'+p+'" points="'+v[1]+'"/>'});
+  d.w0.forEach(function(p){h+='<polygon class="w0" points="'+p+'"/>'});
+  d.cp.forEach(function(p){h+='<polygon class="cp" points="'+p+'"/>'});
+  h+='<polygon class="key" points="'+d.k+'"/>';
+  sb.innerHTML=h;
+  sb.querySelectorAll('.v').forEach(function(v){v.addEventListener('click',function(){var t=document.getElementById('ch-'+(+v.getAttribute('data-p')+1));if(t)t.scrollIntoView({behavior:reduce?'auto':'smooth'})})});
+  var k=sb.querySelector('.key');if(k)k.addEventListener('click',function(){$('#keystone').scrollIntoView({behavior:reduce?'auto':'smooth'})});
+}
+function setStep(s,titles){
+  if(s===cur)return;cur=s;
+  sb.querySelectorAll('.v').forEach(function(v){var p=+v.getAttribute('data-p');v.classList.toggle('on',p<s);v.classList.toggle('now',p===s-1&&s<=N)});
+  sb.classList.toggle('done',s>N);
+  $('#sNo').textContent=s===0?'':(s>N?'拱心石':pad(s)+' / '+pad(N));
+  $('#sTitle').textContent=titles[s]||'';
+}
+function track(titles){
+  var story=$('#story'),prog=$('#sProg'),ticking=false;
+  function upd(){
+    ticking=false;var line=innerHeight*0.45,s=0;
+    for(var i=0;i<steps.length;i++){if(steps[i].getBoundingClientRect().top<line)s=+steps[i].getAttribute('data-step')}
+    setStep(s,titles);
+    var r=story.getBoundingClientRect(),p=(line-r.top)/Math.max(1,r.height-line);prog.style.width=Math.max(0,Math.min(1,p))*100+'%';
+  }
+  addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(upd)}},{passive:true});
+  addEventListener('resize',upd);upd();
+}
+function reveal(){
+  if(reduce||!('IntersectionObserver' in window)){document.querySelectorAll('.reveal').forEach(function(e){e.classList.add('in')});return}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal').forEach(function(e){io.observe(e)});
+}
+function itemEl(it){
+  var u=it.link&&safeUrl(it.link),more=!!(it.desc||it.period||u);
+  var a=el(more?'details':'div','acc reveal'+(more?'':' static')),h=el(more?'summary':'div','head'),hd=el('span','hd');
+  hd.appendChild(el('span','t',it.title||''));if(it.org)hd.appendChild(el('span','o',it.org));h.appendChild(hd);
+  if(more){var cv=el('span','chev');cv.innerHTML=icon('chev');h.appendChild(cv)}
+  a.appendChild(h);
+  if(more){var b=el('div','bd');if(it.period)b.appendChild(el('p','per',it.period));if(it.desc)b.appendChild(paras(it.desc,'desc'));
+    if(u){var l=el('a','btn','查看');l.href=u;l.target='_blank';l.rel='noopener';b.appendChild(l)}a.appendChild(b)}
+  return a;
+}
+
+/* ---------- contact block ---------- */
+function contactBlock(d,mail,center){
+  var c=d.contact||{},box=el('div'),row=el('div','row'+(center?' center':''));
+  var v=el('a','btn solid');v.href='contact.vcf';v.innerHTML=icon('user');v.appendChild(document.createTextNode('存入聯絡人'));row.appendChild(v);
+  if(mail){var m=el('button','btn');m.type='button';m.innerHTML=icon('mail');m.appendChild(document.createTextNode('寄信給我'));m.onclick=function(){location.href='mailto:'+mail};row.appendChild(m)}
+  box.appendChild(row);
+  var pills=el('div','pills'+(center?'':' left')),n=0;
+  if(c.phone){var t=el('a','pill','電話');t.href='tel:'+String(c.phone).replace(/[^+\d]/g,'');pills.appendChild(t);n++}
+  (c.links||[]).forEach(function(l){var u=socialUrl(l);if(!u)return;var s=SOCIAL[l.type]||SOCIAL.other;var lab=(l.type==='other'||l.type==='website')&&l.label?l.label:s[0];var a=el('a','pill',lab);a.href=u;a.target='_blank';a.rel='noopener';if(l.type==='line')a.setAttribute('aria-label','加 LINE 好友');pills.appendChild(a);n++});
+  if(n)box.appendChild(pills);
+  return box;
+}
+
+/* ---------- render ---------- */
+function render(d){
+  var name=d.name||'';document.title=name+'｜個人網站';
+  $('#name').textContent=name;$('#fname').textContent=name;$('#nameEn').textContent=d.nameEn||'';
+  $('#tagline').textContent=d.tagline||'';$('#headline').textContent=d.headline||'';
+  if(d.status){$('#status').textContent=d.status;$('#status').hidden=false}
+  $('#updated').textContent=String(d.updated||'').slice(0,10);$('#year').textContent=String(d.updated||'2026').slice(0,4);
+  var c=d.contact||{},mail=email(c.emailEnc);
+  $('#heroCta').appendChild(contactBlock(d,mail,true));
+
+  var chs=(d.chapters||[]).filter(hasContent).slice(0,6);N=chs.length;
+  var box=$('#chapters');box.textContent='';var titles=['往下滑，開始砌橋'];
+  var intro=el('section','ch intro');intro.setAttribute('data-step','0');intro.appendChild(paras(d.intro));box.appendChild(intro);
+  chs.forEach(function(ch,i){
+    var s=el('section','ch');s.id='ch-'+(i+1);s.setAttribute('data-step',String(i+1));
+    s.appendChild(el('p','ch-no',pad(i+1)+' / '+pad(N)));
+    s.appendChild(kai(el('h2','ch-title',ch.title||'')));titles.push(ch.title||'');
+    if(ch.lead)s.appendChild(el('p','ch-lead',ch.lead));
+    if(ch.type==='tags'){var ul=el('ul','chips reveal');(ch.tags||[]).forEach(function(t){if(String(t).trim())ul.appendChild(el('li',null,t))});s.appendChild(ul)}
+    else{var w=el('div','items');(ch.items||[]).forEach(function(it){w.appendChild(itemEl(it))});s.appendChild(w)}
+    box.appendChild(s);
+  });
+  var k=d.keystone||{},ks=el('section','ch keystone');ks.id='keystone';ks.setAttribute('data-step',String(N+1));
+  if(d.photo&&safeUrl(d.photo)){var img=el('img','photo reveal');img.src=d.photo;img.alt=name+'的照片';img.width=124;img.height=124;ks.appendChild(img)}else ks.appendChild(el('div','ks-mark reveal'));
+  ks.appendChild(el('p','ch-no','拱心石'));
+  ks.appendChild(kai(el('h2','ch-title',k.title||'最後放進去的那一塊')));titles.push(k.title||'拱心石');
+  if(k.text)ks.appendChild(paras(k.text,'ch-lead'));
+  box.appendChild(ks);
+  steps=Array.prototype.slice.call(box.querySelectorAll('[data-step]'));
+  buildBridge(Math.max(N,2));track(titles);
+
+  var M=d.modules||{},w;
+  var news=(d.news||[]).filter(function(x){return x.title||x.text});
+  if(news.length){w=sec('news',(M.news||'最新動態'));var nb=el('div','items');news.forEach(function(x){nb.appendChild(itemEl({org:x.date,title:x.title,desc:x.text,link:x.link}))});w.appendChild(nb)}
+  var gal=(d.gallery||[]).filter(function(x){return x.src&&safeUrl(x.src)});
+  if(gal.length){w=sec('gallery',(M.gallery||'作品相簿'));var g=el('div','grid');gal.forEach(function(x){var b=el('button');b.type='button';var im=el('img');im.src=x.src;im.alt=x.caption||'作品照片';im.loading='lazy';b.appendChild(im);if(x.caption)b.appendChild(el('span',null,x.caption));b.onclick=function(){var lb=$('#lightbox');$('img',lb).src=x.src;$('img',lb).alt=x.caption||'';$('p',lb).textContent=x.caption||'';openM(lb)};g.appendChild(b)});w.appendChild(g)}
+  var vids=(d.videos||[]).map(function(x){var m=String(x.url||'').match(/(?:youtu\.be\/|v=|\/shorts\/|\/embed\/|\/live\/)([\w-]{11})/);return m?{id:m[1],title:x.title}:null}).filter(Boolean);
+  if(vids.length){w=sec('videos',(M.videos||'影片'));vids.forEach(function(v){var f=el('div','vid reveal'),fr=el('div','fr'),ifr=document.createElement('iframe');ifr.src='https://www.youtube-nocookie.com/embed/'+v.id;ifr.title=v.title||'影片';ifr.loading='lazy';ifr.allow='accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen';ifr.allowFullscreen=true;ifr.referrerPolicy='strict-origin-when-cross-origin';fr.appendChild(ifr);f.appendChild(fr);if(v.title)f.appendChild(el('p',null,v.title));w.appendChild(f)})}
+  var tes=(d.testimonials||[]).filter(function(x){return x.quote});
+  if(tes.length){w=sec('testimonials',(M.testimonials||'他們怎麼說'));tes.forEach(function(x){var q=el('blockquote','quote reveal');q.appendChild(paras(x.quote));var who=[x.name,x.role].filter(Boolean).join('，');if(who){var f=el('footer',null,'— '+who);q.appendChild(f)}w.appendChild(q)})}
+  var faq=(d.faq||[]).filter(function(x){return x.q});
+  if(faq.length){w=sec('faq',(M.faq||'常見問題'));faq.forEach(function(x){var dt=el('details'),sm=el('summary',null,x.q);dt.appendChild(sm);dt.appendChild(paras(x.a,'ans'));w.appendChild(dt)})}
+  var cal=d.calendar||{},emb=cal.embed&&safeUrl(cal.embed),lnk=cal.link&&safeUrl(cal.link);
+  if(emb&&!/^https:\/\/calendar\.google\.com\/calendar\/(u\/\d+\/)?embed\?/.test(emb))emb=null;
+  if(emb||lnk){w=sec('calendar',cal.title||'我的時間');if(cal.note)w.appendChild(el('p','note',cal.note));
+    if(emb){var u=new URL(emb);u.searchParams.set('mode',{week:'WEEK',month:'MONTH',agenda:'AGENDA'}[cal.view]||'WEEK');if(!u.searchParams.get('ctz'))u.searchParams.set('ctz','Asia/Taipei');['showPrint','showTitle','showCalendars'].forEach(function(p){if(!u.searchParams.has(p))u.searchParams.set(p,'0')});
+      var fr=el('div','frame'),ifr=document.createElement('iframe');ifr.src=u.href;ifr.title=cal.title||'行事曆';ifr.loading='lazy';fr.appendChild(ifr);w.appendChild(fr)}
+    if(lnk){var b=el('a','btn solid');b.href=lnk;b.target='_blank';b.rel='noopener';b.innerHTML=icon('cal');b.appendChild(document.createTextNode(cal.button||'預約時間'));w.appendChild(b)}}
+  var fm=d.form||{},fu=fm.url&&safeUrl(fm.url);
+  if(fu){w=sec('form',fm.title||'留言給我');if(fm.note)w.appendChild(el('p','note',fm.note));
+    if(fm.embed&&/^https:\/\/docs\.google\.com\/forms\//.test(fu)){var eu=new URL(fu);eu.searchParams.set('embedded','true');var ff=el('div','frame'),fi=document.createElement('iframe');fi.src=eu.href;fi.title=fm.title||'表單';fi.loading='lazy';fi.style.height='640px';ff.appendChild(fi);w.appendChild(ff)}
+    else{var fb=el('a','btn solid');fb.href=fu;fb.target='_blank';fb.rel='noopener';fb.innerHTML=icon('form');fb.appendChild(document.createTextNode(fm.button||'填寫表單'));w.appendChild(fb)}}
+
+  var ct=sec('contact','聯絡我');ct.appendChild(el('p','note',(d.contactNote||'有任何合作、問題或只是想聊聊，都歡迎聯絡。')));
+  ct.appendChild(contactBlock(d,mail,false));
+  var rv=d.resume||{},ru=rv.file&&safeUrl(rv.file);
+  var row=el('div','row');row.style.marginTop='22px';
+  if(ru){var rb=el('a','btn solid');rb.href=ru;rb.target='_blank';rb.rel='noopener';rb.innerHTML=icon('down');rb.appendChild(document.createTextNode(rv.label||'下載我的履歷（PDF）'));row.appendChild(rb)}
+  if(mail){var sh=el('button','btn','顯示 Email 地址');sh.type='button';sh.onclick=function(){sh.replaceWith(el('p','mailtext',mail))};row.appendChild(sh)}
+  ct.appendChild(row);
+  reveal();
+}
+fetch('content.json?v='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(render).catch(function(e){var b=$('#chapters');b.textContent='';b.appendChild(el('p','err','內容載入失敗，請重新整理頁面。'));if(window.console)console.error(e)});
+})();
+</script>
+</body>
+</html>
