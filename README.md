@@ -8,6 +8,19 @@
 
 編輯器可以改：基本資料、第一頁的聯絡捷徑（LINE、Instagram、Facebook…）、照片、開場白、故事章節（最多 6 章，每章會在橋上砌一對石頭）、拱心石、最新動態、作品相簿、影片、推薦、常見問題、行事曆與預約、留言表單、履歷下載。沒有填的段落不會顯示。
 
+整理好的內容檔（.json）可以在編輯器的「匯入內容」一次匯入，檢查後再按「儲存並發布」。
+
+## 目錄與段落網址
+
+訪客可以順著故事往下滑，也可以按左上角（或上方橫條右邊）的「目錄」直接跳到任何段落。每個段落都有自己的網址，可以單獨分享，例如：
+
+- 專案：https://liuhsuanyang.github.io/#projects
+- 證照：https://liuhsuanyang.github.io/#certificates
+- 我的時間：https://liuhsuanyang.github.io/#calendar
+- 聯絡我：https://liuhsuanyang.github.io/#contact
+
+每一章的網址會顯示在編輯器「故事章節」的章節標題下面。
+
 ## 以後要加新功能
 
 把收到的更新檔（.zip）在編輯器最下面的「網站更新」安裝即可，你的內容、照片、履歷不會被覆蓋。
