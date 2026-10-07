@@ -49,12 +49,11 @@
 
 ## 字型
 
-- 網站上的中文全部是「全字庫正楷體」，英文與數字全部是 Cinzel（和名片上的英文名同一種字）。
+- 網站上的中文全部是「全字庫正楷體」。英文姓名用 Cinzel（和名片上的英文名同一種字）；其他英文與數字用 EB Garamond（有正常的大小寫）。
 - `assets/kai.woff2` 只包含網站目前用到的字，所以載入很快。之後在編輯器新增的字，會自動從 `assets/kx/` 的備用分塊補上，一樣顯示成正楷體，不需要另外處理。
 - 如果一次新增很多內容，網站會多下載幾個備用分塊。想讓網站再變快，可以請人依新內容重新產生 `assets/kai.woff2`。
-- Cinzel 只有大寫字形，小寫英文會顯示成較小的大寫（例如 Email 地址），這是字型本身的設計。
 
 ## 字型授權
 
 - 全字庫正楷體（© 數位發展部），依「政府資料開放授權條款－第 1 版」使用。
-- Cinzel（Copyright 2020 The Cinzel Project Authors，https://github.com/NDISCOVER/Cinzel ），依 SIL Open Font License 1.1 使用：https://openfontlicense.org
+- EB Garamond（Copyright 2017 The EB Garamond Project Authors，https://github.com/octaviopardo/EBGaramond12 ）與 Cinzel（Copyright 2020 The Cinzel Project Authors，https://github.com/NDISCOVER/Cinzel ），依 SIL Open Font License 1.1 使用：https://openfontlicense.org
